@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorFondo"
+    tools:context=".ui.fragment.GestionMetodoPagoFragment">
+
+    <ScrollView
+        android:id="@+id/scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="3dp"
+        android:paddingLeft="25dp"
+        android:paddingRight="25dp"
+        android:background="@color/colorFondo2">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <ImageView
+                android:padding="40dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/card"
+                android:visibility="visible" />
+
+
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                android:fontFamily="@font/basier_semi_bold"
+                android:gravity="left"
+                android:textColor="@color/colorTextBlue"
+                android:text="*Titular de la tarjeta"/>
+            <EditText
+                android:id="@+id/direccion"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:ems="10"
+                android:fontFamily="@font/basier_regular"
+                android:hint="Escribe el nombre del titular"
+                android:background="@drawable/rounded_edit_text_form"
+                android:inputType="textPersonName"
+                android:padding="8dp"
+                android:textColor="@color/colorTextGris"
+                android:textColorHint="@color/colorTextGris" />
+
+            <TextView
+                android:visibility="gone"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                android:fontFamily="@font/basier_semi_bold"
+                android:gravity="left"
+                android:textColor="@color/colorTextBlue"
+                android:text="*Tipo de ubicación"/>
+            <Spinner
+                android:visibility="gone"
+                android:id="@+id/tipo_ubicacion"
+                android:background="@drawable/spinner"
+                android:layout_width="match_parent"
+
+                android:layout_height="40dp" />
+
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                android:fontFamily="@font/basier_semi_bold"
+                android:gravity="left"
+                android:textColor="@color/colorTextBlue"
+                android:text="*Número de la tarjeta"/>
+            <EditText
+                android:id="@+id/departamento"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:ems="10"
+                android:fontFamily="@font/basier_regular"
+                android:hint="0000 0000 0000 0000"
+                android:background="@drawable/rounded_edit_text_form"
+                android:padding="8dp"
+                android:textColor="@color/colorTextGris"
+                android:textColorHint="@color/colorTextGris"
+                android:inputType="textPersonName" />
+
+
+
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                android:fontFamily="@font/basier_semi_bold"
+                android:gravity="left"
+                android:textColor="@color/colorTextBlue"
+                android:text="*Expiración"/>
+            <EditText
+                android:id="@+id/ciudad"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:ems="10"
+                android:fontFamily="@font/basier_regular"
+                android:hint="MM/AA"
+                android:background="@drawable/rounded_edit_text_form"
+                android:padding="8dp"
+                android:textColor="@color/colorTextGris"
+                android:textColorHint="@color/colorTextGris"
+                android:inputType="textPersonName" />
+
+            <TextView
+                android:visibility="visible"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                android:fontFamily="@font/basier_semi_bold"
+                android:gravity="left"
+                android:textColor="@color/colorTextBlue"
+                android:text="*CCV"/>
+            <EditText
+
+                android:visibility="visible"
+                android:id="@+id/casa_apto"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:ems="10"
+                android:fontFamily="@font/basier_regular"
+                android:hint="000"
+                android:background="@drawable/rounded_edit_text_form"
+                android:inputType="textPersonName"
+                android:padding="8dp"
+                android:textColor="@color/colorTextGris"
+                android:textColorHint="@color/colorTextGris" />
+
+            <TextView
+                android:visibility="gone"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                android:fontFamily="@font/basier_semi_bold"
+                android:gravity="left"
+                android:textColor="@color/colorTextBlue"
+                android:text="*Teléfono"/>
+            <EditText
+                android:visibility="gone"
+                android:id="@+id/telefono"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:ems="10"
+                android:fontFamily="@font/basier_regular"
+                android:hint=""
+                android:background="@drawable/rounded_edit_text_form"
+                android:inputType="phone"
+                android:padding="8dp"
+                android:textColor="@color/colorTextGris"
+                android:textColorHint="@color/colorText" />
+
+            <TextView
+                android:visibility="gone"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                android:fontFamily="@font/basier_semi_bold"
+                android:gravity="left"
+                android:textColor="@color/colorTextBlue"
+                android:text="*Punto de Referencia"/>
+            <EditText
+                android:visibility="gone"
+                android:id="@+id/referencia"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:ems="10"
+                android:fontFamily="@font/basier_regular"
+                android:hint=""
+                android:background="@drawable/rounded_edit_text_form"
+                android:padding="8dp"
+                android:textColor="@color/colorPrimary"
+                android:textColorHint="@color/colorTextGris"
+                android:inputType="textPersonName" />
+
+
+
+
+            <TextView
+                android:visibility="gone"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                android:fontFamily="@font/basier_semi_bold"
+                android:gravity="left"
+                android:textColor="@color/colorTextBlue"
+                android:text="Guardar como"/>
+            <LinearLayout
+                android:visibility="gone"
+                android:orientation="horizontal"
+                android:weightSum="3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:orientation="vertical"
+                    android:weightSum="100"
+                    android:layout_height="100dp">
+                    <LinearLayout
+                        android:id="@+id/ly_casa"
+                        android:layout_weight="80"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp">
+                        <ImageView
+                            android:id="@+id/casa"
+                            android:layout_width="match_parent"
+                            android:src="@drawable/circle_selection"
+                            android:layout_height="match_parent">
+                        </ImageView>
+                    </LinearLayout>
+                    <TextView
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_weight="20"
+                        android:layout_height="0dp"
+                        android:textSize="12dp"
+                        android:fontFamily="@font/arlrdbd"
+                        android:gravity="center|top"
+                        android:textColor="@color/colorAccent"
+                        android:text="Casa"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:orientation="vertical"
+                    android:weightSum="100"
+                    android:layout_height="100dp">
+                    <LinearLayout
+                        android:id="@+id/ly_trabajo"
+                        android:layout_weight="80"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp">
+                        <ImageView
+                            android:id="@+id/trabajo"
+                            android:layout_width="match_parent"
+                            android:src="@drawable/circle_no_selection"
+                            android:layout_height="match_parent">
+                        </ImageView>
+                    </LinearLayout>
+                    <TextView
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_weight="20"
+                        android:layout_height="0dp"
+                        android:textSize="12dp"
+                        android:fontFamily="@font/arlrdbd"
+                        android:gravity="center|top"
+                        android:textColor="@color/colorAccent"
+                        android:text="Trabajo"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:orientation="vertical"
+                    android:weightSum="100"
+                    android:layout_height="100dp">
+                    <LinearLayout
+                        android:id="@+id/ly_punto_encuentro"
+                        android:layout_weight="80"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp">
+                        <ImageView
+                            android:id="@+id/punto_encuentro"
+                            android:layout_width="match_parent"
+                            android:src="@drawable/circle_no_selection"
+                            android:layout_height="match_parent">
+                        </ImageView>
+                    </LinearLayout>
+                    <TextView
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_weight="20"
+                        android:layout_height="0dp"
+                        android:textSize="12dp"
+                        android:fontFamily="@font/arlrdbd"
+                        android:gravity="center|top"
+                        android:textColor="@color/colorAccent"
+                        android:text="Punto de encuentro"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/guardar"
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_weight="20"
+                android:background="@drawable/roundedbutton"
+                android:textSize="15dp"
+                android:text="Guardar método de pago"
+                android:textAllCaps="false"
+                android:fontFamily="@font/basier_semi_bold"
+                android:textColor="#ffff" />
+        </LinearLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

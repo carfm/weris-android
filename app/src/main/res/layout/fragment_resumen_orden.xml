@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/scroll_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="15dp"
+    android:layout_above="@+id/rl_procesar"
+    tools:context=".ui.fragment.ResumenOrdenFragment"
+    android:background="@color/colorFondo">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorFondo">
+        <androidx.recyclerview.widget.RecyclerView
+            android:visibility="visible"
+            android:id="@+id/rv_det_orden"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp"
+            android:background="@color/colorFondo"
+            android:padding="15dp"
+            tools:itemCount="2"
+            android:overScrollMode="never"
+            tools:listitem="@layout/item_det_orden" />
+
+        <LinearLayout
+            android:background="@color/colorFondo"
+            android:id="@+id/rl_agregar"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_alignParentTop="true"
+            android:layout_height="250dp">
+            <TextView
+                android:visibility="visible"
+                android:gravity="center"
+                android:fontFamily="@font/basier_semi_bold"
+                android:textSize="15dp"
+                android:textColor="@color/colorTextBlue"
+                android:layout_width="match_parent"
+
+                android:text="¿Quieres agregar algo más?"
+                android:layout_height="40dp"
+                />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/viewPager"
+                android:visibility="visible"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="0dp"
+                android:layout_marginBottom="0dp"
+                tools:itemCount="1"
+                tools:listitem="@layout/item_prod_resumen"
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginTop="5dp"
+            android:layout_below="@+id/rl_agregar"
+            android:id="@+id/rl_resumen_total"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="70dp">
+
+            <LinearLayout
+                android:paddingTop="5dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:orientation="horizontal"
+                android:weightSum="100"
+                android:background="@color/colorFondo"
+                android:layout_width="match_parent"
+                android:layout_height="35dp">
+                <TextView
+                    android:gravity="left"
+                    android:fontFamily="@font/basier_semi_bold"
+                    android:textSize="18dp"
+                    android:textColor="@color/colorTextBlue"
+                    android:layout_weight="70"
+                    android:layout_width="0dp"
+                    android:text="Subtotal"
+                    android:layout_height="match_parent"
+                    />
+                <TextView
+                    android:id="@+id/subtotal"
+                    android:gravity="right"
+                    android:fontFamily="@font/basier_semi_bold"
+                    android:textSize="18dp"
+                    android:textColor="@color/colorTextBlue"
+                    android:layout_weight="30"
+                    android:layout_width="0dp"
+                    android:text="$56.80"
+                    android:layout_height="match_parent"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/cancelar"
+                android:background="@color/colorFondo"
+                android:paddingTop="5dp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="35dp">
+                <TextView
+                    android:gravity="center"
+                    android:fontFamily="@font/basier_regular"
+                    android:textSize="12dp"
+                    android:textColor="@color/colorTextGris"
+                    android:layout_width="match_parent"
+                    android:text="X Cancelar orden"
+                    android:layout_height="match_parent"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+        <RelativeLayout
+            android:id="@+id/rl_ver"
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:background="@color/colorFondo"
+            android:gravity="center"
+            android:layout_below="@+id/rl_resumen_total"
+            android:layout_height="70dp">
+
+            <Button
+                android:id="@+id/fijar"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="20"
+                android:background="@drawable/roundedbutton"
+                android:fontFamily="@font/basier_semi_bold"
+                android:text="Procesar mi orden"
+                android:textAllCaps="false"
+                android:textColor="#ffff"
+                android:textSize="15dp" />
+        </RelativeLayout>
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>
+

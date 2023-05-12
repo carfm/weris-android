@@ -1,0 +1,74 @@
+{
+  "_note1": "KEEP THIS FILE! Check it into a version control system (VCS) like git.",
+  "_note2": "ObjectBox manages crucial IDs for your object model. See docs for details.",
+  "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
+  "entities": [
+    {
+      "id": "1:4289924418466542539",
+      "lastPropertyId": "9:7229857951646148826",
+      "name": "CardClient",
+      "properties": [
+        {
+          "id": "1:6752719618093361398",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:7270123951442777734",
+          "name": "nombre",
+          "type": 9
+        },
+        {
+          "id": "3:7070602741046970817",
+          "name": "rx",
+          "type": 9
+        },
+        {
+          "id": "4:2889482046468174393",
+          "name": "ry",
+          "type": 9
+        },
+        {
+          "id": "5:6891281268360584095",
+          "name": "rz",
+          "type": 9
+        },
+        {
+          "id": "6:3029153202103605686",
+          "name": "autorizado",
+          "type": 5,
+          "flags": 2
+        },
+        {
+          "id": "7:6183567961002894550",
+          "name": "tkn",
+          "type": 9
+        },
+        {
+          "id": "8:7072189394501652676",
+          "name": "ath",
+          "type": 9
+        },
+        {
+          "id": "9:7229857951646148826",
+          "name": "defl",
+          "type": 5,
+          "flags": 2
+        }
+      ],
+      "relations": []
+    }
+  ],
+  "lastEntityId": "1:4289924418466542539",
+  "lastIndexId": "0:0",
+  "lastRelationId": "0:0",
+  "lastSequenceId": "0:0",
+  "modelVersion": 5,
+  "modelVersionParserMinimum": 5,
+  "retiredEntityUids": [],
+  "retiredIndexUids": [],
+  "retiredPropertyUids": [],
+  "retiredRelationUids": [],
+  "version": 1
+}

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/barra"
+    android:layout_width="match_parent" android:layout_height="70dp">
+    <LinearLayout
+
+        android:orientation="horizontal"
+        android:background="@color/colorPrimary"
+        android:id="@+id/layout_menu_bar_top"
+        android:layout_width="match_parent"
+        android:layout_alignParentTop="true"
+        android:gravity="center"
+        android:weightSum="9"
+        android:layout_height="70dp">
+        <RelativeLayout
+            android:id="@+id/back"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/img_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:adjustViewBounds="true"
+                android:src="@drawable/baseline_keyboard_backspace_24"
+                android:visibility="visible" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/logo"
+            android:layout_width="0dp"
+            android:layout_weight="5"
+            android:gravity="center"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/img_logo"
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:adjustViewBounds="true"
+                android:src="@drawable/logo_weris" />
+            <TextView
+                android:id="@+id/textEmpresa"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/basier_semi_bold"
+                android:gravity="center"
+                android:maxLines="2"
+                android:text=""
+                android:textColor="@color/colorText"
+                android:textSize="20dp" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/configuracion"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:layout_height="match_parent">
+
+            <ImageView
+
+                android:id="@+id/img_configuracion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:adjustViewBounds="true"
+                android:src="@drawable/baseline_tune_24"
+                android:visibility="gone" />
+        </RelativeLayout>
+    </LinearLayout>
+</RelativeLayout>

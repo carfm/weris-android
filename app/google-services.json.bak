@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "89771000554",
+    "firebase_url": "https://guindapp-dev-sv.firebaseio.com",
+    "project_id": "guindapp-dev-sv",
+    "storage_bucket": "guindapp-dev-sv.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:89771000554:android:9a7ee67044256f1b228d93",
+        "android_client_info": {
+          "package_name": "sv.com.guindapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "89771000554-7o7cdf78ofcmfb19us2funefvlluduau.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "sv.com.guindapp",
+            "certificate_hash": "0efcf84fba927f619bd4d1594847556061bf25d3"
+          }
+        },
+        {
+          "client_id": "89771000554-jt1do8k99i6dl0n91g4kpckfem7v0rr5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBr4H2o7Gyf-cgimtX1w0xLxBCbtOPKl08"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "89771000554-jt1do8k99i6dl0n91g4kpckfem7v0rr5.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "89771000554-t9ad9h8skrev2sftack0qjcfa25lbg3g.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "sv.com.guindappp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

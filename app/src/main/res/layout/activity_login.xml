@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#F9F9F9"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/fondo_login"
+        android:visibility="visible" />
+
+    <ScrollView
+
+        android:id="@+id/scroll"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="80dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="30dp"
+            android:weightSum="100">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/logo_weris"
+                    android:visibility="visible" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/text1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="40dp"
+                android:layout_marginBottom="20dp"
+                android:fontFamily="@font/basier_semi_bold"
+                android:gravity="center"
+                android:paddingTop="0dp"
+                android:text="Login"
+                android:textColor="#1a287a"
+                android:textSize="25dp" />
+
+            <EditText
+                android:id="@+id/email"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="15dp"
+                android:backgroundTint="@color/colorText"
+                android:fontFamily="@font/basier_regular"
+                android:hint="Correo electronico"
+                android:inputType="textWebEmailAddress"
+                android:padding="4dp"
+                android:textColor="@color/colorText"
+                android:textColorHint="@color/colorText"
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/contrasena"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="15dp"
+                android:backgroundTint="@color/colorText"
+                android:fontFamily="@font/basier_regular"
+                android:hint="Contraseña"
+                android:inputType="textPassword"
+                android:padding="4dp"
+                android:textColor="@color/colorText"
+                android:textColorHint="@color/colorText"
+                android:textSize="15dp" />
+
+            <Button
+                android:id="@+id/ingresar"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="20"
+                android:background="@drawable/roundedbutton"
+                android:fontFamily="@font/basier_medium"
+                android:onClick="iniciarSesion"
+                android:text="Ingresar"
+                android:textAllCaps="false"
+                android:textColor="#ffff"
+                android:textSize="15dp" />
+
+            <Button
+
+                android:id="@+id/ingresar_google"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_gravity="left"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="20"
+                android:background="@drawable/roundedbutton_white"
+                android:fontFamily="@font/basier_regular"
+                android:onClick="iniciarSesionGoogle"
+                android:drawableTint="@color/colorFondo3"
+                android:text="Ingresar con Google"
+                android:textAllCaps="false"
+                android:textColor="@color/colorTextGris"
+                android:textSize="12dp" />
+
+            <Button
+
+                android:id="@+id/ingresar_fb"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_gravity="left"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="20"
+                android:background="@drawable/roundedbutton_fb"
+                android:fontFamily="@font/basier_regular"
+                android:onClick="iniciarSesion"
+                android:text="Ingresar con Facebook"
+                android:textAllCaps="false"
+                android:textColor="@color/colorFondo3"
+                android:textSize="12dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/arlrdbd"
+                android:gravity="center"
+                android:paddingTop="0dp"
+                android:text="Ingresar con"
+                android:textColor="#ababab"
+                android:textSize="15dp"
+                android:visibility="gone" />
+
+            <RelativeLayout
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp"
+                android:gravity="center">
+
+                <RelativeLayout
+                    android:id="@+id/fb"
+                    android:layout_width="150dp"
+                    android:layout_height="35dp"
+                    android:layout_marginRight="20dp"
+                    android:background="@drawable/logo_fb_login" />
+
+                <RelativeLayout
+                    android:id="@+id/google"
+                    android:layout_width="150dp"
+                    android:layout_height="35dp"
+                    android:layout_toRightOf="@+id/fb"
+                    android:background="@drawable/logo_google_login" />
+            </RelativeLayout>
+        </LinearLayout>
+
+    </ScrollView>
+</RelativeLayout>

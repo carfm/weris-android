@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/rounded_background"
+    android:padding="15dp"
+    tools:context=".ui.fragment.MainFragment">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/buscar"
+                android:imeOptions="actionSearch"
+                android:inputType="text"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginLeft="35dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="15dp"
+                android:background="@drawable/rounded_edit_text"
+                android:drawableLeft="@drawable/baseline_search_24"
+                android:fontFamily="@font/basier_regular"
+                android:gravity="left|center"
+                android:hint="Buscar"
+                android:padding="5dp"
+                android:textColor="@color/colorPrimaryDark"
+                android:textColorHint="@color/colorPrimaryDark">
+
+            </EditText>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:id="@+id/promociones"
+            android:layout_margin="0dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:textColor="@color/colorPrimary"
+                android:text="Promociones"
+                android:textSize="25dp"
+                android:fontFamily="@font/arlrdbd"
+                android:layout_height="wrap_content">
+            </TextView>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_promociones"
+                android:layout_width="match_parent"
+
+                android:layout_height="match_parent" />
+        </LinearLayout>
+        <ScrollView
+            android:visibility="gone"
+            android:background="@color/colorFondo"
+            android:layout_marginTop="3dp"
+            android:id="@+id/scroll_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:visibility="gone"
+                    android:orientation="vertical"
+                    android:id="@+id/cerca_de_ti"
+                    android:layout_margin="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:textColor="@color/colorPrimary"
+                        android:text="Negocios cerca de ti"
+                        android:textSize="25dp"
+                        android:fontFamily="@font/arlrdbd"
+                        android:layout_height="wrap_content">
+                    </TextView>
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_cerca_ti"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                </LinearLayout>
+                <LinearLayout
+                    android:visibility="gone"
+                    android:orientation="vertical"
+                    android:id="@+id/nuevos"
+                    android:layout_margin="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:textColor="@color/colorPrimary"
+                        android:text="Nuevos"
+                        android:textSize="25dp"
+                        android:fontFamily="@font/arlrdbd"
+                        android:layout_height="wrap_content">
+                    </TextView>
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_nuevos"
+                        android:layout_width="match_parent"
+
+                        android:layout_height="match_parent" />
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+
+</RelativeLayout>

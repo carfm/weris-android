@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:weightSum="100"
+    android:layout_height="200dp">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="0dp"
+        android:layout_weight="60"
+
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/producto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/basier_semi_bold"
+            android:gravity="left"
+            android:padding="5dp"
+            android:layout_marginBottom="0dp"
+            android:maxLines="2"
+            android:text="Acerca de nosotros"
+            android:textColor="@color/colorTextBlue"
+            android:textSize="15dp" />
+        <TextView
+            android:id="@+id/descripcion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/basier_regular"
+            android:gravity="left"
+            android:maxLines="5"
+            android:padding="5dp"
+            android:text="Todo inicia hace más de 50 años cuando una talentosa mujer sabía que tenía un gran sazón en la comida y decide emprender su propio negocio llamado Tienda las victorias, pasando los años se toma una gran decisión la cual es elaborar pan dulce. El coraje y la visión del negocio hace que la tienda de conveniencia se convierta en una panadería."
+            android:textColor="@color/colorTextGris"
+            android:textSize="12dp" />
+        <TextView
+            android:layout_marginTop="10dp"
+            android:layout_gravity="left"
+            android:id="@+id/precio"
+            android:layout_width="100dp"
+            android:layout_height="45dp"
+            android:fontFamily="@font/basier_semi_bold"
+            android:gravity="center"
+            android:layout_marginBottom="10dp"
+            android:maxLines="1"
+            android:background="@drawable/roundedbutton"
+            android:text="Precio"
+            android:textColor="@color/colorFondo3"
+            android:textSize="15dp" />
+    </LinearLayout>
+
+
+    <ImageView
+        android:padding="10dp"
+        android:id="@+id/img_prod"
+        android:src="@drawable/teclena"
+        android:layout_width="0dp"
+        android:layout_weight="40"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:adjustViewBounds="true">
+    </ImageView>
+
+</LinearLayout>

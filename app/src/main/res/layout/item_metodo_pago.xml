@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    card_view:cardBackgroundColor="@color/colorFondo"
+    card_view:cardElevation="0dp"
+    card_view:cardMaxElevation="0dp"
+    card_view:cardPreventCornerOverlap="true"
+    card_view:cardUseCompatPadding="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout"
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="3dp"
+        android:background="@drawable/rounded_item_gestion"
+        android:weightSum="100">
+
+        <TextView
+            android:id="@+id/tipo"
+            android:layout_width="248dp"
+            android:layout_height="27dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="44dp"
+            android:layout_marginEnd="30dp"
+            android:fontFamily="@font/basier_semi_bold"
+            android:gravity="left"
+            android:text="Casa"
+            android:textColor="@color/colorTextBlue"
+            android:textSize="20sp"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintStart_toEndOf="@+id/imageView3"
+            card_view:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/direccion"
+            android:layout_width="245dp"
+            android:layout_height="27dp"
+            android:layout_marginStart="13dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="8dp"
+            android:fontFamily="@font/basier_regular"
+            android:maxLines="3"
+            android:text="Colonia San Mateo Pasaje Medellin casa #33 San Salvador, San Salvador"
+            android:textColor="@color/colorTextGris"
+            card_view:layout_constraintBottom_toBottomOf="parent"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintStart_toEndOf="@+id/imageView3"
+            card_view:layout_constraintTop_toBottomOf="@+id/tipo"
+            card_view:layout_constraintVertical_bias="0.0" />
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="52dp"
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintTop_toTopOf="parent"
+            card_view:srcCompat="@drawable/visa" />
+
+        <TextView
+            android:id="@+id/eliminar_item"
+            android:layout_width="60dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="28dp"
+            android:fontFamily="@font/basier_semi_bold"
+            android:gravity="center"
+            android:text="Eliminar"
+            android:textColor="@color/red"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

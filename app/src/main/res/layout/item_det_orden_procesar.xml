@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:background="@drawable/rounded_background_item"
+    android:orientation="horizontal"
+    android:layout_marginBottom="10dp"
+    android:weightSum="100">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginRight="0dp"
+
+        android:padding="10dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:weightSum="100">
+        <RelativeLayout
+            android:layout_weight="20"
+            android:layout_width="0dp"
+            android:gravity="center"
+            android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/img"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                android:src="@drawable/circle_det_orden" />
+
+            <TextView
+                android:id="@+id/cantidad"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:fontFamily="@font/basier_semi_bold"
+                android:gravity="center"
+                android:paddingBottom="0dp"
+                android:text="12"
+                android:textColor="@color/colorPrimary"
+                android:textSize="18dp" />
+        </RelativeLayout>
+
+
+        <TextView
+            android:id="@+id/nombre"
+            android:layout_weight="60"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:gravity="left|center"
+            android:maxLines="2"
+            android:fontFamily="@font/basier_semi_bold"
+            android:text="Tartaleta de Chocolates"
+            android:textColor="@color/white"
+            android:textSize="15dp" />
+
+        <TextView
+            android:layout_weight="20"
+            android:id="@+id/precio"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/basier_semi_bold"
+            android:gravity="right|center"
+            android:text="$25.00"
+            android:textColor="@color/white"
+            android:textSize="15dp" />
+    </LinearLayout>
+
+</LinearLayout>

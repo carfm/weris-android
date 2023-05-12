@@ -1,0 +1,396 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.fragment.PerfilComercioFragment">
+
+    <ScrollView
+        android:id="@+id/scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/rl_ver"
+        android:layout_marginTop="3dp"
+
+        android:background="@color/colorPrimaryDark">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorFondo">
+
+                <ImageView
+                    android:id="@+id/img_producto"
+                    android:layout_width="match_parent"
+                    android:layout_height="220dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/principal_comercio" />
+
+                <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/profile_image"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_below="@+id/img_producto"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="-30dp"
+                    android:layout_marginRight="40dp"
+                    android:src="@color/colorPrimary"
+                    android:visibility="gone"
+                    app:civ_border_color="#0000"
+                    app:civ_border_width="3dp" />
+
+                <TextView
+                    android:id="@+id/tiempo_espera"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_below="@+id/img_producto"
+                    android:layout_alignBottom="@+id/profile_image"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="-12dp"
+                    android:layout_marginRight="40dp"
+                    android:layout_marginBottom="0dp"
+                    android:fontFamily="@font/arlrdbd"
+                    android:gravity="center|top"
+                    android:text="30 min"
+                    android:textColor="#fff"
+                    android:textSize="15dp"
+                    android:visibility="gone" />
+            </RelativeLayout>
+
+            <TextView
+                android:padding="15dp"
+                android:id="@+id/nombre_comercio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/basier_semi_bold"
+                android:gravity="center"
+                android:text="¡Gracias por permitirnos entregarte
+lo que pediste de McDonald’s!"
+                android:textColor="@color/white"
+                android:textSize="20dp" />
+
+            <TextView
+                android:padding="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0dp"
+                android:fontFamily="@font/basier_regular"
+                android:gravity="center"
+                android:text="En unos momentos uno de nuestros drivers estará
+tocando la puerta de tu casa, para que disfrutes tu comida, ¡Buen provecho por cierto!"
+                android:textColor="@color/white"
+                android:textSize="15dp" />
+
+            <TextView
+                android:padding="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/basier_semi_bold"
+                android:gravity="center"
+                android:text="Te esperamos pronto"
+                android:textColor="@color/white"
+                android:textSize="25dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:background="@color/colorFondo"
+                android:orientation="horizontal"
+                android:paddingLeft="5dp"
+                android:visibility="gone"
+                android:weightSum="100">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="7dp"
+                    android:layout_weight="20"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:weightSum="100">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/img_logo_comercio"
+                        android:layout_width="70dp"
+                        android:layout_height="90dp"
+                        android:src="@drawable/logo_teclena"
+                        app:civ_border_color="#0000"
+                        app:civ_border_width="3dp" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="2dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_margin="5dp"
+                    android:background="@color/colorAccent" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:layout_weight="80"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:weightSum="100">
+
+                    <TextView
+                        android:id="@+id/nombreo"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="80"
+                        android:fontFamily="@font/novabold"
+                        android:gravity="left|center"
+                        android:maxLines="2"
+                        android:text="LA TECLEÑA "
+                        android:textColor="@color/colorAccent"
+                        android:textSize="35dp" />
+
+                    <TextView
+                        android:id="@+id/sub_categoria"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="20"
+                        android:fontFamily="@font/arlrdbd"
+                        android:gravity="left"
+                        android:text="Panaderia y Restaurante"
+                        android:textColor="@color/colorText"
+                        android:textSize="20dp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="@color/colorFondo"
+                android:orientation="horizontal"
+                android:paddingLeft="5dp"
+                android:visibility="gone"
+                android:weightSum="9">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/arlrdbd"
+                        android:gravity="center"
+                        android:paddingTop="5dp"
+                        android:text="HORARIO"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="15dp" />
+
+                    <TextView
+                        android:id="@+id/horario"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/arlrdbd"
+                        android:gravity="center_horizontal"
+                        android:padding="5dp"
+                        android:text="8:00 am / 9:00 pm"
+                        android:textColor="@color/colorText"
+                        android:textSize="12dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/arlrdbd"
+                        android:gravity="center"
+                        android:paddingTop="5dp"
+                        android:text="MINIMO"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="15dp" />
+
+                    <TextView
+                        android:id="@+id/minimo_consumo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/arlrdbd"
+                        android:gravity="center_horizontal"
+                        android:padding="5dp"
+                        android:text="$5"
+                        android:textColor="@color/colorText"
+                        android:textSize="12dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:orientation="horizontal"
+                    android:weightSum="100">
+
+                    <TextView
+                        android:id="@+id/calificacion"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="50"
+                        android:fontFamily="@font/arlrdbd"
+                        android:gravity="center|right"
+                        android:padding="5dp"
+                        android:text="5"
+                        android:textColor="@color/colorText"
+                        android:textSize="25dp" />
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="50"
+                        android:gravity="center|left">
+
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_gravity="center"
+                            android:adjustViewBounds="true"
+                            android:gravity="center"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/baseline_grade_24" />
+                    </RelativeLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:background="@color/colorFondo"
+                android:orientation="vertical"
+                android:visibility="gone"
+                android:weightSum="100">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/arlrdbd"
+                    android:gravity="center"
+                    android:paddingTop="5dp"
+                    android:text="Acerca de nosotros"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="15dp" />
+
+                <TextView
+                    android:id="@+id/acerca_nosotros"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/arlrdbd"
+                    android:gravity="center_horizontal"
+                    android:padding="5dp"
+                    android:text="Todo inicia hace más de 50 años cuando una talentosa mujer sabía que tenía un gran sazón en la comida y decide emprender su propio negocio llamado Tienda las victorias, pasando los años se toma una gran decisión la cual es elaborar pan dulce. El coraje y la visión del negocio hace que la tienda de conveniencia se convierta en una panadería."
+                    android:textColor="@color/colorText"
+                    android:textSize="12dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginBottom="5dp"
+                android:background="@color/colorFondo"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:visibility="gone"
+                android:weightSum="100">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:fontFamily="@font/arlrdbd"
+                    android:gravity="center"
+                    android:paddingTop="5dp"
+                    android:text="Ubicacion"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="15dp" />
+
+                <fragment
+                    android:id="@+id/map"
+                    android:name="com.google.android.gms.maps.SupportMapFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/ir_maps"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="20"
+                android:background="@drawable/roundedbutton"
+                android:fontFamily="@font/arlrdbd"
+                android:text="Ir a Maps"
+                android:textColor="#ffff"
+                android:textSize="15dp"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/ir_waze"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="20dp"
+                android:layout_weight="20"
+                android:background="@drawable/roundedbutton"
+                android:fontFamily="@font/arlrdbd"
+                android:text="Ir a Waze"
+                android:textColor="#ffff"
+                android:textSize="15dp"
+                android:visibility="gone" />
+        </LinearLayout>
+    </ScrollView>
+
+    <RelativeLayout
+        android:id="@+id/rl_ver"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorFondo"
+        android:visibility="gone">
+
+        <Button
+            android:id="@+id/resumen_orden"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="20"
+            android:background="@drawable/roundedbutton"
+            android:fontFamily="@font/arlrdbd"
+            android:text="Resumen de Orden- $56.00"
+            android:textColor="#ffff"
+            android:textSize="15dp" />
+    </RelativeLayout>
+
+</RelativeLayout>

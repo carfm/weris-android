@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/colorFondo"
+    tools:context=".ui.fragment.SeleccionProductoFragment">
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/rl_agregar"
+        android:layout_marginTop="0dp"
+        android:background="@color/colorFondo">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <!-- TODO: Update blank fragment layout -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorFondo"
+                android:gravity="center"
+                android:paddingTop="20dp"
+                android:paddingBottom="20dp">
+
+                <ImageView
+                    android:id="@+id/img_producto"
+                    android:layout_width="match_parent"
+                    android:layout_height="220dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/teclena" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:layout_gravity="center"
+                android:background="@color/colorFondo2" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:background="@drawable/rectangle"
+                android:orientation="horizontal"
+                android:weightSum="100">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="70"
+                    android:orientation="vertical"
+                    android:paddingLeft="40dp"
+                    android:paddingTop="0dp">
+
+                    <TextView
+                        android:id="@+id/nombre"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:fontFamily="@font/basier_semi_bold"
+                        android:gravity="left|center"
+                        android:maxLines="2"
+                        android:text="Tartaleta de chocolate"
+                        android:textColor="@color/colorTextBlue"
+                        android:textSize="15dp" />
+
+                    <TextView
+                        android:id="@+id/descripcion"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/arlrdbd"
+                        android:gravity="left"
+                        android:padding="5dp"
+                        android:text=""
+                        android:textColor="@color/colorText"
+                        android:textSize="12dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="30"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:paddingRight="40dp">
+
+                    <TextView
+                        android:id="@+id/precio"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:fontFamily="@font/arlrdbd"
+                        android:gravity="center"
+                        android:text="$56.00"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="15dp" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:layout_gravity="center"
+                android:background="@color/colorFondo2" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:background="@color/colorFondo"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/basier_semi_bold"
+                    android:gravity="center"
+                    android:text="Unidades"
+                    android:textColor="@color/colorTextBlue"
+                    android:textSize="18dp" />
+
+                <com.shawnlin.numberpicker.NumberPicker
+                    android:id="@+id/cantidad"
+                    android:layout_width="80dp"
+                    android:layout_height="100dp"
+                    android:layout_centerInParent="true"
+                    app:np_dividerColor="@color/colorPrimary"
+                    app:np_height="180dp"
+                    app:np_max="60"
+                    app:np_min="1"
+                    app:np_selectedTextColor="@color/colorPrimary"
+                    app:np_selectedTextSize="30dp"
+                    app:np_textColor="@color/colorPrimary"
+                    app:np_textSize="20dp"
+                    app:np_typeface="@string/roboto_light"
+                    app:np_value="1"
+                    app:np_width="64dp" />
+                <TextView
+                    android:padding="15dp"
+                    android:id="@+id/seleccion_uno"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/basier_semi_bold"
+                    android:gravity="left"
+                    android:text="Seleccione"
+                    android:textColor="@color/colorTextBlue"
+                    android:textSize="15dp" />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:padding="15dp"
+                    android:overScrollMode="never"
+                    android:id="@+id/prod_sub_cat_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    />
+                <TextView
+                    android:padding="15dp"
+                    android:id="@+id/seleccion_dos"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/basier_semi_bold"
+                    android:gravity="left"
+                    android:text="Seleccione"
+                    android:textColor="@color/colorTextBlue"
+                    android:textSize="15dp" />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_marginTop="10dp"
+                    android:padding="15dp"
+                    android:overScrollMode="never"
+                    android:id="@+id/prod_opciones_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+
+                </androidx.recyclerview.widget.RecyclerView>
+                <TextView
+                    android:padding="15dp"
+                    android:id="@+id/seleccion_tres"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/basier_semi_bold"
+                    android:gravity="left"
+                    android:text="Seleccione"
+                    android:textColor="@color/colorTextBlue"
+                    android:textSize="15dp" />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_marginTop="10dp"
+                    android:padding="15dp"
+                    android:overScrollMode="never"
+                    android:id="@+id/prod_adicional_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+
+                </androidx.recyclerview.widget.RecyclerView>
+                <TextView
+                    android:padding="15dp"
+                    android:id="@+id/seleccion_cuatro"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/basier_semi_bold"
+                    android:gravity="left"
+                    android:text="Seleccione"
+                    android:textColor="@color/colorTextBlue"
+                    android:textSize="15dp" />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_marginTop="10dp"
+                    android:padding="15dp"
+                    android:overScrollMode="never"
+                    android:id="@+id/prod_agregados_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+
+                </androidx.recyclerview.widget.RecyclerView>
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginRight="25dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/basier_semi_bold"
+                    android:gravity="left|center"
+                    android:maxLines="2"
+                    android:text="Notas para este producto"
+                    android:textColor="@color/colorTextBlue"
+                    android:textSize="18dp" />
+                <TextView
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginRight="25dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/basier_regular"
+                    android:gravity="left|center"
+                    android:text="El restaurante las tendrá en cuenta cuando lo prepare."
+                    android:textColor="@color/colorTextGris"
+                    android:textSize="15dp" />
+                <EditText
+                    android:id="@+id/instrucciones"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginBottom="15dp"
+                    android:backgroundTint="@color/colorText"
+                    android:fontFamily="@font/basier_regular"
+                    android:gravity="center"
+                    android:hint="Escribe las instrucciones que necesites"
+                    android:padding="5dp"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorTextGris"
+                    android:textColorHint="@color/colorTextGris"
+                    android:textSize="15dp">
+
+                </EditText>
+
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+    <RelativeLayout
+        android:id="@+id/rl_agregar"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:background="@color/colorFondo"
+        android:layout_height="70dp">
+
+        <Button
+            android:id="@+id/ingresar"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="20"
+            android:background="@drawable/roundedbutton"
+            android:fontFamily="@font/basier_semi_bold"
+            android:text="Agregar al carrito"
+            android:textAllCaps="false"
+            android:textColor="#ffff"
+            android:textSize="15dp" />
+    </RelativeLayout>
+
+</RelativeLayout>
