@@ -124,7 +124,7 @@ tocando la puerta de tu casa, para que disfrutes tu comida, ¡Buen provecho por 
                         android:id="@+id/img_logo_comercio"
                         android:layout_width="70dp"
                         android:layout_height="90dp"
-                        android:src="@drawable/logo_teclena"
+
                         app:civ_border_color="#0000"
                         app:civ_border_width="3dp" />
 

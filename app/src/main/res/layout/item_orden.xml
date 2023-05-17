@@ -28,7 +28,7 @@
                 android:layout_gravity="center"
                 android:adjustViewBounds="true"
                 android:scaleType="fitXY"
-                android:src="@drawable/teclena" />
+                 />
         </RelativeLayout>
         <LinearLayout
             android:id="@+id/l1"

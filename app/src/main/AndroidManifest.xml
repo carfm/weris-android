@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="sv.com.weris" >
+    package="sv.com.guindapp" >
 
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
@@ -13,12 +13,12 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
-        android:name=".util.App"
+        android:name="sv.com.guindapp.util.App"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/ic_usuarios"
         android:label="@string/app_name"
         android:networkSecurityConfig="@xml/network_security_config"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/ic_usuarios"
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
 
@@ -53,25 +53,26 @@
             android:value="@string/default_notification_channel_id" />
 
         <activity
-            android:name=".MapsActivity"
+            android:name="sv.com.guindapp.MapsActivity"
             android:label="@string/title_activity_maps" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="sv.com.weris.DireccionesActivity" />
+                android:value="sv.com.guindapp.DireccionesActivity" />
         </activity>
         <activity
-            android:name=".DireccionesActivity"
+            android:name="sv.com.guindapp.DireccionesActivity"
             android:label="@string/title_activity_direcciones"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName="sv.com.guindapp.MainActivity"
             android:theme="@style/AppTheme.NoActionBar" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="sv.com.weris.MainActivity" />
+                android:value="sv.com.guindapp.MainActivity" />
         </activity>
         <activity
-            android:name=".SplashActivity"
+            android:name="sv.com.guindapp.SplashActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme" >
+            android:theme="@style/AppTheme"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -79,12 +80,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name="sv.com.guindapp.MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
-            android:name=".LoginActivity"
+            android:name="sv.com.guindapp.LoginActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
@@ -110,13 +111,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".IntroActivity"
+            android:name="sv.com.guindapp.IntroActivity"
             android:configChanges="orientation|screenSize"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
 
         <service
-            android:name=".service.MyFirebaseMessagingService"
+            android:name="sv.com.guindapp.service.MyFirebaseMessagingService"
             android:exported="false" >
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
