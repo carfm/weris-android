@@ -91,30 +91,32 @@
                 android:orientation="horizontal"
                 android:weightSum="3"
                 android:layout_height="70dp">
-                <ImageView
-                    android:padding="10dp"
-                    android:src="@drawable/recibida"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:scaleType="centerInside"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:adjustViewBounds="true">
-                </ImageView>
-                <ImageView
-                    android:padding="10dp"
-                    android:src="@drawable/motorista"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
 
+                <ImageView
+                    android:id="@+id/orden_recibida"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:adjustViewBounds="true"
+                    android:padding="10dp"
                     android:scaleType="centerInside"
-                    android:adjustViewBounds="true">
-                </ImageView>
+                    android:src="@drawable/recibida"></ImageView>
+
+                <ImageView
+                    android:id="@+id/delivery"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:adjustViewBounds="true"
+
+                    android:padding="10dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/motorista"></ImageView>
                 <ImageView
                     android:padding="10dp"
-                    android:id="@+id/img_prod"
+                    android:id="@+id/disfruta"
                     android:src="@drawable/completa"
                     android:layout_width="0dp"
                     android:layout_weight="1"
@@ -131,33 +133,39 @@
             android:orientation="horizontal"
             android:weightSum="3"
             android:layout_height="40dp">
+
             <TextView
+                android:id="@+id/text_orden_recibida"
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="match_parent"
                 android:layout_marginTop="0dp"
+                android:layout_weight="1"
                 android:fontFamily="@font/basier_regular"
                 android:gravity="center"
                 android:maxLines="2"
                 android:text="Orden Recibida"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="12dp" />
+
             <TextView
+                android:id="@+id/text_delivery"
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="match_parent"
                 android:layout_marginTop="0dp"
+                android:layout_weight="1"
                 android:fontFamily="@font/basier_regular"
                 android:gravity="center"
                 android:maxLines="2"
                 android:text="Delivery"
                 android:textColor="@color/colorTextGris"
                 android:textSize="12dp" />
+
             <TextView
+                android:id="@+id/text_disfruta"
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="match_parent"
                 android:layout_marginTop="0dp"
+                android:layout_weight="1"
                 android:fontFamily="@font/basier_semi_bold"
                 android:gravity="center"
                 android:maxLines="2"

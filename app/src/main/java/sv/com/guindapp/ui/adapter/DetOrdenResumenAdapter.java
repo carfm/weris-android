@@ -19,6 +19,10 @@ import java.util.List;
 
 import sv.com.guindapp.R;
 import sv.com.guindapp.model.data.DetOrden;
+import sv.com.guindapp.model.data.ProdAdicionales;
+import sv.com.guindapp.model.data.ProdAgregado;
+import sv.com.guindapp.model.data.ProdOpciones;
+import sv.com.guindapp.model.data.ProdSubCat;
 import sv.com.guindapp.model.interfaces.OnItemClickListener;
 
 
@@ -49,8 +53,8 @@ public class DetOrdenResumenAdapter extends RecyclerView.Adapter<DetOrdenResumen
     public void onBindViewHolder(@NonNull final DetOrdenResumenAdapter.MyViewHolder holder, final int position) {
         DetOrden item = ofertasList.get(position);
         holder.nombre.setText(item.getProducto().getNombre());
-        holder.descripcion.setText(item.getProducto().getDescripcion());
         DecimalFormat formatter = new DecimalFormat("#,##0.00");
+        holder.descripcion.setText(item.getObservaciones());
         holder.subtotal.setText("$ " + formatter.format(item.getSubtotal().setScale(2, RoundingMode.HALF_UP)));
         Glide.with(context).load(item.getProducto().getUrl()).into(holder.img);
         holder.bind(item, listener);

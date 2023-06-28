@@ -2,6 +2,8 @@ package sv.com.guindapp.ui.fragment;
 
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,7 +46,21 @@ public class GestionMetodoPagoFragment extends Fragment {
     LinearLayout casaLy, trabajoLy, puntoEncuentroLy;
     Spinner tipoUbicacion, departamentoSpinner, municipioSpinner;
     ArrayAdapter<String> adapterTipoUbicacion, adapterDepartamentoSpinner,
-    adapterMunicipioSpinner;
+            adapterMunicipioSpinner;
+
+    private static final int CARD_NUMBER_TOTAL_SYMBOLS = 19; // size of pattern 0000-0000-0000-0000
+    private static final int CARD_NUMBER_TOTAL_DIGITS = 16; // max numbers of digits in pattern: 0000 x 4
+    private static final int CARD_NUMBER_DIVIDER_MODULO = 5; // means divider position is every 5th symbol beginning with 1
+    private static final int CARD_NUMBER_DIVIDER_POSITION = CARD_NUMBER_DIVIDER_MODULO - 1; // means divider position is every 4th symbol beginning with 0
+    private static final char CARD_NUMBER_DIVIDER = '-';
+
+    private static final int CARD_DATE_TOTAL_SYMBOLS = 5; // size of pattern MM/YY
+    private static final int CARD_DATE_TOTAL_DIGITS = 4; // max numbers of digits in pattern: MM + YY
+    private static final int CARD_DATE_DIVIDER_MODULO = 3; // means divider position is every 3rd symbol beginning with 1
+    private static final int CARD_DATE_DIVIDER_POSITION = CARD_DATE_DIVIDER_MODULO - 1; // means divider position is every 2nd symbol beginning with 0
+    private static final char CARD_DATE_DIVIDER = '/';
+
+    private static final int CARD_CVC_TOTAL_SYMBOLS = 3;
 
     public GestionMetodoPagoFragment() {
         // Required empty public constructor
@@ -69,6 +85,48 @@ public class GestionMetodoPagoFragment extends Fragment {
         puntoReferencia = view.findViewById(R.id.referencia);
         ciudad = view.findViewById(R.id.ciudad);
         departamento = view.findViewById(R.id.departamento);
+
+
+        departamento.addTextChangedListener(new TextWatcher() {
+            private static final char space = ' ';
+
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                // Remove all spacing char
+
+                int pos = 0;
+                while (true) {
+                    if (pos >= s.length()) break;
+                    if (space == s.charAt(pos) && (((pos + 1) % 5) != 0 || pos + 1 == s.length())) {
+                        s.delete(pos, pos + 1);
+                    } else {
+                        pos++;
+                    }
+                }
+
+                // Insert char where needed.
+                pos = 4;
+                while (true) {
+                    if (pos >= s.length()) break;
+                    final char c = s.charAt(pos);
+                    // Only if its a digit where there should be a space we insert a space
+                    if ("0123456789".indexOf(c) >= 0) {
+                        s.insert(pos, "" + space);
+                    }
+                    pos += 5;
+                }
+            }
+        });
 
         casa = view.findViewById(R.id.casa);
         trabajo = view.findViewById(R.id.trabajo);
@@ -158,18 +216,26 @@ public class GestionMetodoPagoFragment extends Fragment {
         direccionCliente.setNombre(direccion.getText().toString());
         direccionCliente.setTarjeta(departamento.getText().toString());
         direccionCliente.setFechaVencimiento(ciudad.getText().toString());
+        direccionCliente.setCodigo(casaApto.getText().toString());
 
         ServicesAPI servicesAPI = RetrofitClient.getClient().create(ServicesAPI.class);
-        Call  call = servicesAPI.crearMetodoPagoCliente(direccionCliente);
+        Call<MetodoPago> call = servicesAPI.crearMetodoPagoCliente(direccionCliente);
 
 
         call.enqueue(new Callback<MetodoPago>() {
             @Override
-            public void onResponse(Call call, Response response) {
+            public void onResponse(Call<MetodoPago> call, Response<MetodoPago> response) {
                 if (response.isSuccessful()) {
                     System.out.println("Se envio: " + response);
-                    Toast.makeText(getContext(), "Se creo el metodo de pago correctamente", Toast.LENGTH_LONG).show();
-                    ((MainActivity) getContext()).irFormasPagoTarjeta();
+
+                    MetodoPago metodoPago = response.body();
+
+                    if (metodoPago != null) {
+                        Toast.makeText(getContext(), "Se creo el metodo de pago correctamente", Toast.LENGTH_LONG).show();
+                        ((MainActivity) getContext()).irFormasPagoTarjeta();
+                    } else {
+                        System.out.println("Hubo un error al crear el método de pago");
+                    }
                 } else {
                     System.out.println(response.errorBody());
                     System.out.println("Hubo un error al guardar el metodo de pago");
@@ -178,13 +244,53 @@ public class GestionMetodoPagoFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call call, Throwable t) {
+            public void onFailure(Call<MetodoPago> call, Throwable t) {
                 System.out.println(t.getMessage());
                 Toast.makeText(getContext(), "Hubo un error al sincronizar el metodo de pago", Toast.LENGTH_LONG).show();
             }
         });
 
 
+    }
+
+    private boolean isInputCorrect(Editable s, int size, int dividerPosition, char divider) {
+        boolean isCorrect = s.length() <= size;
+        for (int i = 0; i < s.length(); i++) {
+            if (i > 0 && (i + 1) % dividerPosition == 0) {
+                isCorrect &= divider == s.charAt(i);
+            } else {
+                isCorrect &= Character.isDigit(s.charAt(i));
+            }
+        }
+        return isCorrect;
+    }
+
+    private String concatString(char[] digits, int dividerPosition, char divider) {
+        final StringBuilder formatted = new StringBuilder();
+
+        for (int i = 0; i < digits.length; i++) {
+            if (digits[i] != 0) {
+                formatted.append(digits[i]);
+                if ((i > 0) && (i < (digits.length - 1)) && (((i + 1) % dividerPosition) == 0)) {
+                    formatted.append(divider);
+                }
+            }
+        }
+
+        return formatted.toString();
+    }
+
+    private char[] getDigitArray(final Editable s, final int size) {
+        char[] digits = new char[size];
+        int index = 0;
+        for (int i = 0; i < s.length() && index < size; i++) {
+            char current = s.charAt(i);
+            if (Character.isDigit(current)) {
+                digits[index] = current;
+                index++;
+            }
+        }
+        return digits;
     }
 
 

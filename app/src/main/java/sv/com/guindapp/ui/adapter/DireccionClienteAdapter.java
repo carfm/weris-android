@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -20,14 +21,17 @@ public class DireccionClienteAdapter extends RecyclerView.Adapter<DireccionClien
     Context context;
     private List<DireccionCliente> ofertasList;
     private final OnItemClickListener listener;
+    private final OnItemClickListener listener2;
     private boolean gestion;
 
     public DireccionClienteAdapter(List<DireccionCliente> ofertasList, Context context,
-                                   OnItemClickListener listener,boolean gestion) {
+                                   OnItemClickListener listener, boolean gestion,
+                                   OnItemClickListener listener2) {
         this.ofertasList = ofertasList;
         this.context = context;
         this.listener = listener;
         this.gestion = gestion;
+        this.listener2 = listener2;
     }
 
     public void updateData(List<DireccionCliente> ofertasList) {
@@ -46,7 +50,7 @@ public class DireccionClienteAdapter extends RecyclerView.Adapter<DireccionClien
     public void onBindViewHolder(@NonNull final DireccionClienteAdapter.MyViewHolder holder, final int position) {
         DireccionCliente item = ofertasList.get(position);
         String tipo = "";
-        switch (item.getTipo()){
+        switch (item.getTipo()) {
             case "T":
                 tipo = "Trabajo";
                 break;
@@ -59,8 +63,16 @@ public class DireccionClienteAdapter extends RecyclerView.Adapter<DireccionClien
         }
         holder.tipo.setText(tipo);
         holder.direccion.setText(item.getDireccion());
-        holder.editar_item.setVisibility((gestion ? View.VISIBLE : View.GONE));
+        //holder.editar_item.setVisibility((gestion ? View.VISIBLE : View.GONE));
         holder.eliminar_item.setVisibility((gestion ? View.VISIBLE : View.GONE));
+        if (gestion) {
+            holder.eliminar_item.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener2.onItemClick(item);
+                }
+            });
+        }
         holder.bind(item, listener);
     }
 
@@ -72,7 +84,8 @@ public class DireccionClienteAdapter extends RecyclerView.Adapter<DireccionClien
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        TextView tipo, direccion,eliminar_item,editar_item;
+        TextView tipo, direccion, editar_item;
+        RelativeLayout eliminar_item;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);

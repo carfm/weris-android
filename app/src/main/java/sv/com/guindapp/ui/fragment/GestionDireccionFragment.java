@@ -41,7 +41,7 @@ import sv.com.guindapp.service.ServicesAPI;
  */
 public class GestionDireccionFragment extends Fragment {
     DireccionCliente direccionCliente;
-    EditText direccion, casaApto, puntoReferencia, ciudad, departamento;
+    EditText direccion, casaApto, puntoReferencia, ciudad, departamento, telefono;
     Button guardar;
     String tipo;
     ImageView casa, trabajo, puntoEncuentro;
@@ -83,6 +83,7 @@ public class GestionDireccionFragment extends Fragment {
         puntoEncuentroLy = view.findViewById(R.id.ly_punto_encuentro);
 
         tipoUbicacion = view.findViewById(R.id.tipo_ubicacion);
+        telefono = view.findViewById(R.id.telefono);
 
         ArrayList<String> nameList = new ArrayList<>();
 
@@ -102,6 +103,8 @@ public class GestionDireccionFragment extends Fragment {
             direccion.setText(direccionCliente.getDireccion());
             puntoReferencia.setText(direccionCliente.getPuntoReferencia());
             ciudad.setText(direccionCliente.getCiudad());
+            casaApto.setText(direccionCliente.getNumeroCasa());
+            telefono.setText(direccionCliente.getTelefono());
             tipo = direccionCliente.getTipo();
             switch (tipo) {
                 case "T":
@@ -176,14 +179,28 @@ public class GestionDireccionFragment extends Fragment {
     }
 
 
-    public void guardar() {
+    public Integer guardar() {
+        if (direccion.getText().toString().trim().isEmpty()) {
+            Toast.makeText(getContext(), "Ingrese una dirección de envio", Toast.LENGTH_LONG).show();
+            return null;
+        }
+
+        if (telefono.getText().toString().trim().isEmpty() || telefono.getText().toString().trim().length() < 8) {
+            Toast.makeText(getContext(), "Ingrese un número de teléfono de contacto", Toast.LENGTH_LONG).show();
+            return null;
+        }
+
+
         direccionCliente.setDireccion(direccion.getText().toString());
         direccionCliente.setCiudad(ciudad.getText().toString());
         direccionCliente.setCliente(MainActivity.cliente);
         direccionCliente.setLatitud(direccionCliente.getLatitud());
         direccionCliente.setLongitud(direccionCliente.getLongitud());
         direccionCliente.setPuntoReferencia(puntoReferencia.getText().toString());
-        direccionCliente.setTipo(tipo);
+        direccionCliente.setTipo(tipoUbicacion.getSelectedItemPosition() == 0 ? "C" :
+                tipoUbicacion.getSelectedItemPosition() == 1 ? "T" : "P");
+        direccionCliente.setTelefono(telefono.getText().toString());
+        direccionCliente.setNumeroCasa(casaApto.getText().toString());
 
         ServicesAPI servicesAPI = RetrofitClient.getClient().create(ServicesAPI.class);
         Call call;
@@ -220,6 +237,7 @@ public class GestionDireccionFragment extends Fragment {
             }
         });
 
+        return 1;
 
     }
 

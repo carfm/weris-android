@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -15,6 +16,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.jakewharton.rxbinding.view.RxView;
 
 import java.math.RoundingMode;
@@ -30,6 +33,7 @@ import sv.com.guindapp.model.interfaces.FragmentFunctions;
 import sv.com.guindapp.model.interfaces.IParametro;
 import sv.com.guindapp.model.interfaces.OnItemClickListener;
 import sv.com.guindapp.ui.adapter.DetOrdenProcesarAdapter;
+import sv.com.guindapp.util.AppConstants;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -41,8 +45,10 @@ public class OrdenFragment extends Fragment implements FragmentFunctions {
     private Button calificar, rutaPedido;
     private Orden orden;
     private TextView subtotal, cargo, otrosCargos, total, metodoPago, direccion, comercio;
-    private TextView instrucciones, comercioInfo, transportistaInfo, estado, fechaHora, pedido, tiempo;
+    private TextView instrucciones, comercioInfo, transportistaInfo, estado, fechaHora, pedido, tiempo,
+            text_orden_recibida, text_delivery, text_disfruta;
     LinearLayout comercioLy, direccionLy, transportistaLy;
+    ImageView orden_recibida, delivery, disfruta;
 
     public OrdenFragment() {
         // Required empty public constructor
@@ -81,6 +87,14 @@ public class OrdenFragment extends Fragment implements FragmentFunctions {
         pedido = view.findViewById(R.id.pedido);
         fechaHora = view.findViewById(R.id.fecha_hora);
         tiempo = view.findViewById(R.id.tiempo);
+
+        orden_recibida = view.findViewById(R.id.orden_recibida);
+        delivery = view.findViewById(R.id.delivery);
+        disfruta = view.findViewById(R.id.disfruta);
+
+        text_orden_recibida = view.findViewById(R.id.text_orden_recibida);
+        text_delivery = view.findViewById(R.id.text_delivery);
+        text_disfruta = view.findViewById(R.id.text_disfruta);
 
         direccionLy = view.findViewById(R.id.ly_direccion);
         comercioLy = view.findViewById(R.id.ly_comercio);
@@ -170,11 +184,60 @@ public class OrdenFragment extends Fragment implements FragmentFunctions {
                 throwable.printStackTrace();
             }
         });
+        inicializarRecorrido();
     }
 
     @Override
     public void allowBackPressed() {
         ((MainActivity) getContext()).getOpciones().setVisibility(View.VISIBLE);
+    }
+
+    public void inicializarRecorrido() {
+
+        Glide.with(getContext()).load(R.drawable.ic_bag_grey)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .skipMemoryCache(true)
+                .into(orden_recibida);
+        Glide.with(getContext()).load(R.drawable.ic_moto_grey)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .skipMemoryCache(true)
+                .into(delivery);
+        Glide.with(getContext()).load(R.drawable.ic_face_grey)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .skipMemoryCache(true)
+                .into(disfruta);
+
+        text_orden_recibida.setTextColor(getResources().getColor(R.color.colorTextGris));
+        text_delivery.setTextColor(getResources().getColor(R.color.colorTextGris));
+        text_disfruta.setTextColor(getResources().getColor(R.color.colorTextGris));
+
+        if (orden.getEstadoOrden().getId() == AppConstants.ESTADO_ORDEN_EN_PREPARACION
+                || orden.getEstadoOrden().getId() == AppConstants.ESTADO_ORDEN_ORDEN_LISTA
+                || orden.getEstadoOrden().getId() == AppConstants.ESTADO_ORDEN_ENTREGADA_A_DRIVER) {
+            Glide.with(getContext()).load(R.drawable.ic_bag_orange)
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .skipMemoryCache(true)
+                    .into(orden_recibida);
+            text_orden_recibida.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+        }
+
+        if (orden.getEstadoOrden().getId() == AppConstants.ESTADO_ORDEN_EN_RUTA
+                || orden.getEstadoOrden().getId() == AppConstants.ESTADO_ORDEN_LLEGO_PUNTO_ENTREGA) {
+            Glide.with(getContext()).load(R.drawable.ic_moto_orange)
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .skipMemoryCache(true)
+                    .into(delivery);
+            text_delivery.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+        }
+
+        if (orden.getEstadoOrden().getId() == AppConstants.ESTADO_ORDEN_ENTREGADA_A_CLIENTE) {
+            Glide.with(getContext()).load(R.drawable.ic_face_orange)
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .skipMemoryCache(true)
+                    .into(disfruta);
+            text_disfruta.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+        }
+
     }
 
 }

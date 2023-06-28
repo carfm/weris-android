@@ -317,6 +317,7 @@ public class MetodosPagoFragment extends Fragment {
         metodoPagoAdapter = new MetodoPagoAdapter(metodoPagoClienteList, getContext(), new OnItemClickListener() {
             @Override
             public void onItemClick(IParametro item) {
+
                 eliminarTarjeta((MetodoPago) item);
             }
         },true);

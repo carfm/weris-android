@@ -35,6 +35,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import org.json.JSONObject;
 
@@ -279,17 +280,17 @@ public class LoginActivity extends AppCompatActivity {
                     Cliente ofertas = response.body();
 
                     System.out.println("Tamaño: " + ofertas);
-                    FirebaseInstanceId.getInstance().getInstanceId()
-                            .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                    FirebaseMessaging.getInstance().getToken()
+                            .addOnCompleteListener(new OnCompleteListener<String>() {
                                 @Override
-                                public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                                public void onComplete(@NonNull Task<String> task) {
                                     if (!task.isSuccessful()) {
                                         Log.w(TAG, "getInstanceId failed", task.getException());
                                         return;
                                     }
 
                                     // Get new Instance ID token
-                                    String token = task.getResult().getToken();
+                                    String token = task.getResult();
 
                                     // Log and toast
                                     //String msg = getString(R.string.msg_token_fmt, token);

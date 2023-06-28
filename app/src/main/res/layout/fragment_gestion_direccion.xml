@@ -27,7 +27,7 @@
                 android:fontFamily="@font/basier_semi_bold"
                 android:gravity="left"
                 android:textColor="@color/colorTextBlue"
-                android:text="*Colonia, Barrio, Pasaje, Calle. "/>
+                android:text="*Dirección completa"/>
             <EditText
                 android:id="@+id/direccion"
                 android:layout_width="match_parent"
@@ -59,6 +59,7 @@
                 android:layout_height="40dp" />
 
             <TextView
+                android:visibility="gone"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:layout_width="match_parent"
@@ -69,6 +70,7 @@
                 android:textColor="@color/colorTextBlue"
                 android:text="*Departamento"/>
             <EditText
+                android:visibility="gone"
                 android:id="@+id/departamento"
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
@@ -84,6 +86,7 @@
 
 
             <TextView
+                android:visibility="gone"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:layout_width="match_parent"
@@ -94,6 +97,7 @@
                 android:textColor="@color/colorTextBlue"
                 android:text="*Municipio"/>
             <EditText
+                android:visibility="gone"
                 android:id="@+id/ciudad"
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
@@ -107,6 +111,7 @@
                 android:inputType="textPersonName" />
 
             <TextView
+                android:visibility="gone"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:layout_width="match_parent"
@@ -117,7 +122,7 @@
                 android:textColor="@color/colorTextBlue"
                 android:text="*Número de casa, Apto., Edificio"/>
             <EditText
-
+                android:visibility="gone"
                 android:id="@+id/casa_apto"
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
@@ -173,8 +178,8 @@
                 android:hint=""
                 android:background="@drawable/rounded_edit_text_form"
                 android:padding="8dp"
-                android:textColor="@color/colorPrimary"
-                android:textColorHint="@color/colorTextGris"
+                android:textColor="@color/colorTextGris"
+                android:textColorHint="@color/colorText"
                 android:inputType="textPersonName" />
 
 

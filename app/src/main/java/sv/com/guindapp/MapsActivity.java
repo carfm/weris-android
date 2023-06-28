@@ -1,5 +1,6 @@
 package sv.com.guindapp;
 
+import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
@@ -18,6 +19,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.Priority;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -25,6 +29,10 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.CancellationToken;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.OnTokenCanceledListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.jakewharton.rxbinding.view.RxView;
 
@@ -49,6 +57,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     Integer idCliente;
     Integer idDireccionCliente;
     DireccionCliente direccionCliente;
+    private FusedLocationProviderClient fusedLocationClient;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -139,8 +149,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         RxView.clicks(fijar).subscribe(new Action1<Void>() {
             @Override
             public void call(Void aVoid) {
-
-
                 finish();
                 enviarGestion();
             }
@@ -198,7 +206,52 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     public void obtenerUbicacionActual() {
         Toast.makeText(this, "Obteniendo ubicacion actual", Toast.LENGTH_LONG).show();
-        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        fusedLocationClient.getCurrentLocation(Priority.PRIORITY_HIGH_ACCURACY,
+                        new CancellationToken() {
+                            @NonNull
+                            @Override
+                            public CancellationToken onCanceledRequested(@NonNull OnTokenCanceledListener onTokenCanceledListener) {
+                                return null;
+                            }
+
+                            @Override
+                            public boolean isCancellationRequested() {
+                                return false;
+                            }
+                        })
+                .addOnSuccessListener(this, new OnSuccessListener<Location>() {
+                    @Override
+                    public void onSuccess(Location location) {
+                        // Got last known location. In some rare situations this can be null.
+                        if (location != null) {
+                            // Logic to handle location object
+                            ubicarPunto(location);
+                        } else {
+                            Toast.makeText(context, "No se pudo obtener tu ubicacion", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                })
+                .addOnFailureListener(this, new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(context, "No se pudo obtener tu ubicacion", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+
+   /*     locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         //locationManager = ((LocationManager))getSystemService(this.LOCATION_SERVICE);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
@@ -211,6 +264,24 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             return;
         }
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000, 5, locationListenerGPS);
+   */
+    }
+
+    public void ubicarPunto(Location location){
+        System.out.println("llego aca");
+        // Add a marker in Sydney and move the camera
+        this.location = location;
+        LatLng sydney = new LatLng(location.getLatitude(), location.getLongitude());
+        mMap.addMarker(new MarkerOptions()
+                .position(sydney)
+                .title("Ubicacion Actual")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE))
+                .draggable(true));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 15));
+        // Zoom in, animating the camera.
+        mMap.animateCamera(CameraUpdateFactory.zoomIn());
+        // Zoom out to zoom level 10, animating with a duration of 2 seconds.
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(15), 2000, null);
     }
 
     //para obtener las ubicaciones latitud, latitud y altitud funcion con internet o sin internet
@@ -220,21 +291,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         public void onLocationChanged(Location l) {
             // double latitude=location.getLatitude();
             //double longitude=location.getLongitude();
-            System.out.println("llego aca");
-            location = l;
-            locationManager.removeUpdates(locationListenerGPS);
-            // Add a marker in Sydney and move the camera
-            LatLng sydney = new LatLng(location.getLatitude(), location.getLongitude());
-            mMap.addMarker(new MarkerOptions()
-                    .position(sydney)
-                    .title("Ubicacion Actual")
-                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE))
-                    .draggable(true));
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 15));
-            // Zoom in, animating the camera.
-            mMap.animateCamera(CameraUpdateFactory.zoomIn());
-            // Zoom out to zoom level 10, animating with a duration of 2 seconds.
-            mMap.animateCamera(CameraUpdateFactory.zoomTo(15), 2000, null);
+
         }
 
         @Override

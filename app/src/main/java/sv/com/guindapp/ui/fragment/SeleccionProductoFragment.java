@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -72,6 +73,7 @@ public class SeleccionProductoFragment extends Fragment implements FragmentFunct
     ProdAgregadoAdapter prodAgregadoAdapter;
     DecimalFormat formatter = new DecimalFormat("#,##0.00");
     BigDecimal subTotal = new BigDecimal(0.0);
+    EditText instrucciones;
 
     public SeleccionProductoFragment() {
         // Required empty public constructor
@@ -102,6 +104,7 @@ public class SeleccionProductoFragment extends Fragment implements FragmentFunct
             precio = getActivity().findViewById(R.id.precio);
             button = getActivity().findViewById(R.id.ingresar);
             cantidad = getActivity().findViewById(R.id.cantidad);
+            instrucciones = getActivity().findViewById(R.id.instrucciones);
             seleccionUno = getActivity().findViewById(R.id.seleccion_uno);
             seleccionDos = getActivity().findViewById(R.id.seleccion_dos);
             seleccionTres = getActivity().findViewById(R.id.seleccion_tres);
@@ -129,7 +132,8 @@ public class SeleccionProductoFragment extends Fragment implements FragmentFunct
                     System.out.println("cantidad: " + cantidad.getValue());
                     BigDecimal cant = new BigDecimal(cantidad.getValue());
                     ((MainActivity) getContext()).agregarProducto(producto, comercio, cant, subTotal,
-                            prodSubCatListSelected, prodOpcionesListSelected, prodAgregadoListSelected, prodAdicionalesListSelected);
+                            prodSubCatListSelected, prodOpcionesListSelected, prodAgregadoListSelected,
+                            prodAdicionalesListSelected, instrucciones.getText().toString());
                 }
             }, new Action1<Throwable>() {
                 @Override

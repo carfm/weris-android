@@ -52,7 +52,7 @@
 
     <ImageView
         android:padding="10dp"
-        android:id="@+id/img_prod"
+        android:id="@+id/disfruta"
 
         android:layout_width="0dp"
         android:layout_weight="40"

@@ -40,6 +40,7 @@ import sv.com.guindapp.model.interfaces.OnItemClickListener;
 import sv.com.guindapp.api.RetrofitClient;
 import sv.com.guindapp.service.ServicesAPI;
 import sv.com.guindapp.ui.adapter.TipoProdComercioAdapter;
+import sv.com.guindapp.util.Cargador;
 
 public class PerfilComercioFragment extends Fragment {
 
@@ -88,7 +89,7 @@ public class PerfilComercioFragment extends Fragment {
         minimoConsumo = getActivity().findViewById(R.id.minimo_consumo);
         calificacion = getActivity().findViewById(R.id.calificacion);
         acercaNosotros = getActivity().findViewById(R.id.acerca_nosotros);
-        tiempoEspera = getActivity().findViewById(R.id.tiempo_espera);
+        tiempoEspera = getActivity().findViewById(R.id.horario);
 
         perfil = getActivity().findViewById(R.id.img_producto);
         logo = getActivity().findViewById(R.id.img_logo_comercio);
@@ -134,6 +135,7 @@ public class PerfilComercioFragment extends Fragment {
     }
 
     public void obtenerProductos() {
+        //Cargador.show((MainActivity) getContext());
         ServicesAPI servicesAPI = RetrofitClient.getClient().create(ServicesAPI.class);
         Call<List<TipoProdComercio>> call = servicesAPI.tipoProdByComercio(comercio.getComercioPK().getIdCompania(), comercio.getComercioPK().getIdAfiliado(), comercio.getComercioPK().getId());
         call.enqueue(new Callback<List<TipoProdComercio>>() {
@@ -152,11 +154,13 @@ public class PerfilComercioFragment extends Fragment {
                 } else {
                     System.out.println("Error: " + response.errorBody());
                 }
+                //Cargador.hide();
             }
 
             @Override
             public void onFailure(Call<List<TipoProdComercio>> call, Throwable t) {
 //                esta.setText(t.getMessage());
+                //Cargador.hide();
                 Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });

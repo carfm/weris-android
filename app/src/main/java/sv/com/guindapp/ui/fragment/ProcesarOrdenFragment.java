@@ -38,6 +38,8 @@ import sv.com.guindapp.R;
 import sv.com.guindapp.api.RetrofitClient;
 import sv.com.guindapp.model.data.Cliente;
 import sv.com.guindapp.model.data.DetOrden;
+import sv.com.guindapp.model.data.FormaPago;
+import sv.com.guindapp.model.data.FormaPagoPK;
 import sv.com.guindapp.model.data.Orden;
 import sv.com.guindapp.model.data.Pedido;
 import sv.com.guindapp.model.interfaces.FragmentFunctions;
@@ -57,12 +59,12 @@ public class ProcesarOrdenFragment extends Fragment implements FragmentFunctions
     private Button procesarOrden;
     private Orden orden;
     private TextView subtotal, cargo, otrosCargos, total, metodoPago, direccion, textEmpresa,
-            werimovil,txtMetodoPago;
+            werimovil, txtMetodoPago;
     private EditText instrucciones;
     LinearLayout metodoPagoLy, direccionLy;
     private Cliente cliente;
     Dialog customDialog;
-    RadioButton efectivo,tarjeta;
+    RadioButton efectivo, tarjeta;
 
     public ProcesarOrdenFragment() {
         // Required empty public constructor
@@ -113,12 +115,12 @@ public class ProcesarOrdenFragment extends Fragment implements FragmentFunctions
         } else {
             direccion.setText("Seleccionar direccion");
         }
-        if(orden.getFormaPago() != null){
-            if(orden.getFormaPago().getFormaPagoPK().getId() == 2){
+        if (orden.getFormaPago() != null) {
+            if (orden.getFormaPago().getFormaPagoPK().getId() == 2) {
                 txtMetodoPago.setVisibility(View.VISIBLE);
                 metodoPagoLy.setVisibility(View.VISIBLE);
                 tarjeta.setChecked(true);
-            }else{
+            } else {
                 txtMetodoPago.setVisibility(View.GONE);
                 metodoPagoLy.setVisibility(View.GONE);
                 efectivo.setChecked(true);
@@ -182,6 +184,71 @@ public class ProcesarOrdenFragment extends Fragment implements FragmentFunctions
                 throwable.printStackTrace();
             }
         });
+
+        RxView.clicks(efectivo).subscribe(new Action1<Void>() {
+            @Override
+            public void call(Void aVoid) {
+                efectivo(efectivo.isChecked());
+            }
+        }, new Action1<Throwable>() {
+            @Override
+            public void call(Throwable throwable) {
+                throwable.printStackTrace();
+            }
+        });
+
+        RxView.clicks(tarjeta).subscribe(new Action1<Void>() {
+            @Override
+            public void call(Void aVoid) {
+                tarjeta(tarjeta.isChecked());
+            }
+        }, new Action1<Throwable>() {
+            @Override
+            public void call(Throwable throwable) {
+                throwable.printStackTrace();
+            }
+        });
+    }
+
+    public void efectivo(Boolean chequeado) {
+        if (chequeado) {
+            // Do your coding
+            txtMetodoPago.setVisibility(View.GONE);
+            metodoPagoLy.setVisibility(View.GONE);
+            FormaPago f = new FormaPago();
+            f.setFormaPagoPK(new FormaPagoPK(1, 1));
+            this.orden.setFormaPago(f);
+            this.orden.setMetodoPagoSeleccionado(null);
+            this.orden.setMetodoPago(null);
+            System.out.println("Entro en efectivo select");
+        } else {
+            txtMetodoPago.setVisibility(View.VISIBLE);
+            metodoPagoLy.setVisibility(View.VISIBLE);
+            FormaPago f = new FormaPago();
+            f.setFormaPagoPK(new FormaPagoPK(2, 1));
+            this.orden.setFormaPago(f);
+            System.out.println("Entro en efectivo no select");
+        }
+    }
+
+
+    public void tarjeta(Boolean chequeado) {
+        if (chequeado) {
+            // Do your coding
+            txtMetodoPago.setVisibility(View.VISIBLE);
+            metodoPagoLy.setVisibility(View.VISIBLE);
+            FormaPago f = new FormaPago();
+            f.setFormaPagoPK(new FormaPagoPK(2, 1));
+            this.orden.setFormaPago(f);
+        } else {
+            txtMetodoPago.setVisibility(View.GONE);
+            metodoPagoLy.setVisibility(View.GONE);
+            FormaPago f = new FormaPago();
+            f.setFormaPagoPK(new FormaPagoPK(1, 1));
+            this.orden.setFormaPago(f);
+            this.orden.setMetodoPagoSeleccionado(null);
+            this.orden.setMetodoPago(null);
+        }
     }
 
     public void totales() {
@@ -196,7 +263,6 @@ public class ProcesarOrdenFragment extends Fragment implements FragmentFunctions
     public void allowBackPressed() {
         ((MainActivity) getContext()).getOpciones().setVisibility(View.VISIBLE);
     }
-
 
 
     public void obtenerCliente() {
@@ -272,9 +338,20 @@ public class ProcesarOrdenFragment extends Fragment implements FragmentFunctions
                     orden = ofertas;
                     orden.setOrdenPK(null);
                     if (orden.getComision() != null) {
-                        orden.setTotal(new BigDecimal(orden.getSubtotal().doubleValue() + orden.getComision().doubleValue()));
-                        totales();
+                        if (orden.getComision().doubleValue() != 0) {
+                            procesarOrden.setVisibility(View.VISIBLE);
+                            orden.setTotal(new BigDecimal(orden.getSubtotal().doubleValue() + orden.getComision().doubleValue()));
+                            totales();
+                        } else {
+                            procesarOrden.setVisibility(View.GONE);
+                            Toast.makeText(getContext(), "Tu ubicación no se encuentra dentro de nuestras zonas de cobertura. Esperamos incluir tu área pronto y poder servirte.", Toast.LENGTH_LONG).show();
+                        }
+                    } else {
+                        procesarOrden.setVisibility(View.GONE);
+                        Toast.makeText(getContext(), "Tu ubicación no se encuentra dentro de nuestras zonas de cobertura. Esperamos incluir tu área pronto y poder servirte.", Toast.LENGTH_LONG).show();
                     }
+
+
                     if (orden.getTipoTransporteCalculado() != null
                             && orden.getTipoTransporteCalculado().getId() == 2) {
                         werimovil.setVisibility(View.VISIBLE);

@@ -14,4 +14,16 @@ public class AppConstants {
 
     public static final String BASE_URL_API = BASE_URL + "weris/webresources/";
 
+    public static final Integer ESTADO_ORDEN_GENERADA = 1;
+    public static final Integer ESTADO_ORDEN_EN_PREPARACION = 2;
+    public static final Integer ESTADO_ORDEN_ORDEN_LISTA = 3;
+    public static final Integer ESTADO_ORDEN_ENTREGADA_A_DRIVER = 4;
+    public static final Integer ESTADO_ORDEN_EN_RUTA = 5;
+    public static final Integer ESTADO_ORDEN_ENTREGADA_A_CLIENTE = 6;
+    public static final Integer ESTADO_ORDEN_LLEGO_POR_LA_ORDEN = 9;
+    public static final Integer ESTADO_ORDEN_CANCELADA = 7;
+    public static final Integer ESTADO_ORDEN_POR_ASIGNAR = 11;
+    public static final Integer ESTADO_ORDEN_LLEGO_PUNTO_ENTREGA = 10;
+
+
 }

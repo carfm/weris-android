@@ -62,7 +62,7 @@
             card_view:layout_constraintTop_toTopOf="parent"
             card_view:srcCompat="@drawable/visa" />
 
-        <TextView
+        <RelativeLayout
             android:id="@+id/eliminar_item"
             android:layout_width="60dp"
             android:layout_height="30dp"
@@ -73,6 +73,17 @@
             android:text="Eliminar"
             android:textColor="@color/red"
             card_view:layout_constraintEnd_toEndOf="parent"
-            card_view:layout_constraintTop_toTopOf="parent" />
+            card_view:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/basier_semi_bold"
+                android:gravity="center"
+                android:text="Eliminar"
+                android:textColor="@color/red" />
+        </RelativeLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

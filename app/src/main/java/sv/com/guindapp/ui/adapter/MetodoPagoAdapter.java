@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -48,7 +49,16 @@ public class MetodoPagoAdapter extends RecyclerView.Adapter<MetodoPagoAdapter.My
         String tipo = item.getNombre();
         holder.tipo.setText(tipo);
         holder.direccion.setText(item.getMascara());
-        holder.bind(item, listener);
+        if (!mostrarEliminar) {
+            holder.bind(item, listener);
+        }
+
+        holder.eliminar_item.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onItemClick(item);
+            }
+        });
     }
 
     @Override
@@ -59,7 +69,8 @@ public class MetodoPagoAdapter extends RecyclerView.Adapter<MetodoPagoAdapter.My
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        TextView tipo, direccion, eliminar_item;
+        TextView tipo, direccion;
+        RelativeLayout eliminar_item;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);

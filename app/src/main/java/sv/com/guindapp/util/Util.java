@@ -251,32 +251,37 @@ public class Util {
         alertDialog.show();
     }
 
-    public static void actualizarToken(String token){
-        ServicesAPI servicesAPI = RetrofitClient.getClient().create(ServicesAPI.class);
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        TokenUsuario tokenUsuario = new TokenUsuario();
-        tokenUsuario.setApp("CLIENTE_ANDROID");
-        tokenUsuario.setToken(token);
-        tokenUsuario.setUserFirebase(user.getUid());
-        Call call = servicesAPI.crearToken(tokenUsuario);
-        call.enqueue(new Callback<Cliente>() {
-            @Override
-            public void onResponse(Call call, Response response) {
-                if (response.isSuccessful()) {
-                    System.out.println("Se envio: " + response);
-                    //Toast.makeText(getContext(), "todo ok", Toast.LENGTH_LONG).show();
-                } else {
-                    System.out.println("Error: " + response.errorBody());
+    public static void actualizarToken(String token) {
+        try {
+            ServicesAPI servicesAPI = RetrofitClient.getClient().create(ServicesAPI.class);
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            TokenUsuario tokenUsuario = new TokenUsuario();
+            tokenUsuario.setApp("CLIENTE_ANDROID");
+            tokenUsuario.setToken(token);
+            tokenUsuario.setUserFirebase(user.getUid());
+            Call call = servicesAPI.crearToken(tokenUsuario);
+            call.enqueue(new Callback<Cliente>() {
+                @Override
+                public void onResponse(Call call, Response response) {
+                    if (response.isSuccessful()) {
+                        System.out.println("Se envio: " + response);
+                        //Toast.makeText(getContext(), "todo ok", Toast.LENGTH_LONG).show();
+                    } else {
+                        System.out.println("Error: " + response.errorBody());
+                    }
                 }
-            }
 
-            @Override
-            public void onFailure(Call call, Throwable t) {
+                @Override
+                public void onFailure(Call call, Throwable t) {
 //                esta.setText(t.getMessage());
-                System.out.println(t.getMessage());
-                //Toast.makeText(this, t.getMessage(), Toast.LENGTH_LONG).show();
-            }
-        });
+                    System.out.println(t.getMessage());
+                    //Toast.makeText(this, t.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            });
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }

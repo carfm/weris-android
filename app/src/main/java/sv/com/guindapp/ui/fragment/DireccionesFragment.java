@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -33,6 +34,7 @@ import sv.com.guindapp.R;
 import sv.com.guindapp.api.RetrofitClient;
 import sv.com.guindapp.model.data.Cliente;
 import sv.com.guindapp.model.data.DireccionCliente;
+import sv.com.guindapp.model.data.MetodoPago;
 import sv.com.guindapp.model.interfaces.IParametro;
 import sv.com.guindapp.model.interfaces.OnItemClickListener;
 import sv.com.guindapp.service.ServicesAPI;
@@ -48,8 +50,9 @@ public class DireccionesFragment extends Fragment {
     private DireccionClienteAdapter adapter;
     private List<DireccionCliente> direccionClienteList;
     FloatingActionButton fab;
-    Button agregar_direccion,fijar;
+    Button agregar_direccion, fijar;
     LinearLayout sin_direcciones;
+    NestedScrollView scroll_view;
     private Cliente cliente;
 
 
@@ -74,7 +77,8 @@ public class DireccionesFragment extends Fragment {
         fab = view.findViewById(R.id.fab);
         sin_direcciones = view.findViewById(R.id.sin_direcciones);
         agregar_direccion = view.findViewById(R.id.agregar_direccion);
-        fijar = view.findViewById(R.id.fijar);
+        fijar = view.findViewById(R.id.fijar2);
+        scroll_view = view.findViewById(R.id.scroll_view);
         agregar_direccion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -85,6 +89,7 @@ public class DireccionesFragment extends Fragment {
         fijar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                System.out.println("aslfsdñlfksdñfksdlñfks");
                 nuevaDireccion(null);
             }
         });
@@ -125,7 +130,7 @@ public class DireccionesFragment extends Fragment {
         call.enqueue(new Callback<List<DireccionCliente>>() {
             @Override
             public void onResponse(Call<List<DireccionCliente>> call, Response<List<DireccionCliente>> response) {
-                try{
+                try {
                     if (response.isSuccessful()) {
                         System.out.println("Respuesta: " + response);
                         //Toast.makeText(getContext(), "todo ok", Toast.LENGTH_LONG).show();
@@ -137,7 +142,7 @@ public class DireccionesFragment extends Fragment {
                     } else {
                         System.out.println("Error: " + response.errorBody());
                     }
-                }catch (Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
 
@@ -154,10 +159,12 @@ public class DireccionesFragment extends Fragment {
     public void llenarLista() {
         if (direccionClienteList.size() > 0) {
             sin_direcciones.setVisibility(View.GONE);
+            scroll_view.setVisibility(View.VISIBLE);
             rvResultados.setVisibility(View.VISIBLE);
             agregar_direccion.setVisibility(View.VISIBLE);
         } else {
             sin_direcciones.setVisibility(View.VISIBLE);
+            scroll_view.setVisibility(View.GONE);
             rvResultados.setVisibility(View.GONE);
             agregar_direccion.setVisibility(View.GONE);
         }
@@ -167,7 +174,13 @@ public class DireccionesFragment extends Fragment {
             public void onItemClick(IParametro item) {
                 gestionDireccion((DireccionCliente) item);
             }
-        },true);
+        }, true,
+                new OnItemClickListener() {
+                    @Override
+                    public void onItemClick(IParametro item) {
+                        eliminarDireccion((DireccionCliente) item);
+                    }
+                });
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getContext(), 1);
         rvResultados.setLayoutManager(mLayoutManager);
         rvResultados.setAdapter(adapter);
@@ -215,7 +228,6 @@ public class DireccionesFragment extends Fragment {
         });
 
 
-
         //finish();
     }
 
@@ -224,9 +236,33 @@ public class DireccionesFragment extends Fragment {
         //finish();
     }
 
-    public void obtenerDireccionCliente() {
+
+    public void eliminarDireccion(DireccionCliente metodoPago) {
+        ServicesAPI servicesAPI = RetrofitClient.getClient().create(ServicesAPI.class);
+        Call<String> call = servicesAPI.borrarDireccionCliente(metodoPago.getDireccionClientePK().getId(),
+                metodoPago.getDireccionClientePK().getIdCompania(),
+                metodoPago.getDireccionClientePK().getIdCliente());
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                if (response.isSuccessful()) {
+                    System.out.println("Respuesta: " + response);
+                    ((MainActivity) getContext()).irDirecciones();
+                    Toast.makeText(getContext(), "Direccion Eliminada", Toast.LENGTH_LONG).show();
+                } else {
+                    System.out.println("Error: " + response.errorBody());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                //                esta.setText(t.getMessage());
+                System.out.println(t.getMessage());
+                //Toast.makeText(this, t.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), "Hubo un error al eliminar la tarjeta", Toast.LENGTH_LONG).show();
+            }
+        });
 
     }
-
 
 }

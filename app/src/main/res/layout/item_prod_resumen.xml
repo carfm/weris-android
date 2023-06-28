@@ -36,7 +36,7 @@
             card_view:layout_constraintBottom_toTopOf="@+id/descripcion"
             card_view:layout_constraintEnd_toEndOf="parent"
             card_view:layout_constraintStart_toStartOf="parent"
-            card_view:layout_constraintTop_toBottomOf="@+id/img_prod" />
+            card_view:layout_constraintTop_toBottomOf="@+id/disfruta" />
 
         <TextView
             android:id="@+id/descripcion"
@@ -58,7 +58,7 @@
             card_view:layout_constraintVertical_bias="0.0" />
 
         <ImageView
-            android:id="@+id/img_prod"
+            android:id="@+id/disfruta"
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:layout_marginStart="36dp"

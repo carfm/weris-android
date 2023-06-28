@@ -66,6 +66,7 @@
             card_view:srcCompat="@drawable/direccion_casa" />
 
         <TextView
+            android:visibility="gone"
             android:id="@+id/editar_item"
             android:layout_width="60dp"
             android:layout_height="30dp"
@@ -78,18 +79,26 @@
             card_view:layout_constraintEnd_toEndOf="parent"
             card_view:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
+        <RelativeLayout
             android:id="@+id/eliminar_item"
             android:layout_width="60dp"
             android:layout_height="30dp"
-            android:layout_marginStart="176dp"
-            android:layout_marginTop="13dp"
-            android:layout_marginEnd="9dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="28dp"
+            android:fontFamily="@font/basier_semi_bold"
             android:gravity="center"
             android:text="Eliminar"
-            android:fontFamily="@font/basier_semi_bold"
             android:textColor="@color/red"
-            card_view:layout_constraintEnd_toStartOf="@+id/editar_item"
-            card_view:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/basier_semi_bold"
+                android:gravity="center"
+                android:text="Eliminar"
+                android:textColor="@color/red" />
+        </RelativeLayout></androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

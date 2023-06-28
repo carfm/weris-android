@@ -34,6 +34,9 @@ public class DetOrden implements Serializable, IParametro {
     private Producto producto;
     private List<ProdSubCat> prodSubCatList;
     private List<ProdOpciones> prodOpcionesList;
+    private List<ProdAgregado> prodAgregadoList;
+    private List<ProdAdicionales> prodAdicionalesList;
+    private String instrucciones;
 
     public DetOrden() {
     }
@@ -173,5 +176,29 @@ public class DetOrden implements Serializable, IParametro {
 
     public void setProdOpcionesList(List<ProdOpciones> prodOpcionesList) {
         this.prodOpcionesList = prodOpcionesList;
+    }
+
+    public List<ProdAgregado> getProdAgregadoList() {
+        return prodAgregadoList;
+    }
+
+    public void setProdAgregadoList(List<ProdAgregado> prodAgregadoList) {
+        this.prodAgregadoList = prodAgregadoList;
+    }
+
+    public List<ProdAdicionales> getProdAdicionalesList() {
+        return prodAdicionalesList;
+    }
+
+    public void setProdAdicionalesList(List<ProdAdicionales> prodAdicionalesList) {
+        this.prodAdicionalesList = prodAdicionalesList;
+    }
+
+    public String getInstrucciones() {
+        return instrucciones;
+    }
+
+    public void setInstrucciones(String instrucciones) {
+        this.instrucciones = instrucciones;
     }
 }

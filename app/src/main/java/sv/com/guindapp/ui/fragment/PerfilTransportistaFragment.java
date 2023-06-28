@@ -11,6 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.bumptech.glide.Glide;
+
 import sv.com.guindapp.MainActivity;
 import sv.com.guindapp.R;
 import sv.com.guindapp.model.data.Orden;
@@ -58,7 +60,7 @@ public class PerfilTransportistaFragment extends Fragment implements FragmentFun
         correo.setText("info@weris.app ");
         telefono.setText(transportista.getCelular());
 
-        //Glide.with(getContext()).load(transportista.getUrlPerfil()).into(fotoPerfil);
+        Glide.with(getContext()).load(transportista.getUrlPerfil()).into(fotoPerfil);
 
         //Glide.with(getContext()).load(transportista.getUrlVehiculo()).into(imgTransporte);
     }

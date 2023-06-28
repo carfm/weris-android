@@ -28,6 +28,7 @@ import com.jakewharton.rxbinding.view.RxView;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -75,6 +76,7 @@ import sv.com.guindapp.ui.fragment.ResumenOrdenFragment;
 import sv.com.guindapp.ui.fragment.RutaOrdenFragment;
 import sv.com.guindapp.ui.fragment.SeleccionProductoFragment;
 import sv.com.guindapp.ui.fragment.MetodosPagoFragment;
+import sv.com.guindapp.util.Cargador;
 import sv.com.guindapp.util.Util;
 
 public class MainActivity extends AppCompatActivity {
@@ -85,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
     private LinearLayout perfil;
     private LinearLayout favoritos;
     private LinearLayout descubrir;
-    private RelativeLayout atras;
+    private RelativeLayout atras, contact;
     private ImageView imgCompras;
     private ImageView imgMenu;
     private ImageView imgPerfil;
@@ -111,6 +113,7 @@ public class MainActivity extends AppCompatActivity {
         if (currentUser == null) {
             Util.activity(this, new LoginActivity(), true);
         } else {
+
             if (savedInstanceState == null) {
                 context = this;
                 compras = findViewById(R.id.compras);
@@ -123,6 +126,7 @@ public class MainActivity extends AppCompatActivity {
                 imgMenu = findViewById(R.id.img_menu);
                 imgPerfil = findViewById(R.id.img_perfil);
                 atras = findViewById(R.id.back);
+                contact = findViewById(R.id.contact);
                 imgLogo = findViewById(R.id.img_logo);
                 textEmpresa = findViewById(R.id.textEmpresa);
                 setOpciones(findViewById(R.id.ly_1));
@@ -133,6 +137,8 @@ public class MainActivity extends AppCompatActivity {
                         irCompras();
                     }
                 });*/
+
+                //System.out.println("token: "+FirebaseAuth.getInstance());
                 RxView.clicks(compras).subscribe(new Action1<Void>() {
                     @Override
                     public void call(Void aVoid) {
@@ -146,6 +152,17 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
+                RxView.clicks(contact).subscribe(new Action1<Void>() {
+                    @Override
+                    public void call(Void aVoid) {
+                        irAyuda();
+                    }
+                }, new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable throwable) {
+                        throwable.printStackTrace();
+                    }
+                });
                 RxView.clicks(menu).subscribe(new Action1<Void>() {
                     @Override
                     public void call(Void aVoid) {
@@ -220,6 +237,7 @@ public class MainActivity extends AppCompatActivity {
                     //bundle.putString("nombre", nombre);
                     FragmentManager fragmentManager = getSupportFragmentManager();
                     fragmentManager.beginTransaction().replace(R.id.container, fragment, "CategoriaFragment").commit();
+                    Cargador.show(this);
                     obtenerCliente();
                 }
             }
@@ -290,6 +308,7 @@ public class MainActivity extends AppCompatActivity {
                     } else {
                         System.out.println("Error: " + response.errorBody());
                     }
+                    Cargador.hide();
                 }
 
                 @Override
@@ -297,6 +316,7 @@ public class MainActivity extends AppCompatActivity {
 //                esta.setText(t.getMessage());
                     System.out.println(t.getMessage());
                     Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_LONG).show();
+                    Cargador.hide();
                 }
             });
         }
@@ -450,7 +470,7 @@ public class MainActivity extends AppCompatActivity {
                                 BigDecimal cantidad, BigDecimal subtotal, List<ProdSubCat> prodSubCatList,
                                 List<ProdOpciones> prodOpcionesList,
                                 List<ProdAgregado> prodAgregadoList,
-                                List<ProdAdicionales> prodAdicionalesList) {
+                                List<ProdAdicionales> prodAdicionalesList, String instrucciones) {
         onBackPressed();
         getSupportFragmentManager().popBackStack();
 
@@ -492,6 +512,37 @@ public class MainActivity extends AppCompatActivity {
         detOrden.setSubtotal(subtotal);
         detOrden.setProdOpcionesList(prodOpcionesList);
         detOrden.setProdSubCatList(prodSubCatList);
+        detOrden.setProdAgregadoList(prodAgregadoList);
+        detOrden.setProdAdicionalesList(prodAdicionalesList);
+        detOrden.setInstrucciones(instrucciones);
+
+        String extras = "";
+        DecimalFormat formatter = new DecimalFormat("#,##0.00");
+
+        for (ProdSubCat psc : detOrden.getProdSubCatList()) {
+            extras = extras + psc.getNombre() + (psc.getPrecio() != null && psc.getPrecio().doubleValue() != 0 ?
+                    "(+$" + formatter.format(psc.getPrecio()) + ")" : "") + ",";
+        }
+
+        for (ProdOpciones po : detOrden.getProdOpcionesList()) {
+            extras = extras + po.getNombre() + (po.getPrecio() != null && po.getPrecio().doubleValue() != 0 ?
+                    "(+$" + formatter.format(po.getPrecio()) + ")" : "") + ",";
+        }
+
+        for (ProdAdicionales pa : detOrden.getProdAdicionalesList()) {
+            extras = extras + pa.getNombre() + (pa.getPrecio() != null && pa.getPrecio().doubleValue() != 0 ?
+                    "(+$" + formatter.format(pa.getPrecio()) + ")" : "") + ",";
+        }
+
+        for (ProdAgregado pag : detOrden.getProdAgregadoList()) {
+            extras = extras + pag.getNombre() + (pag.getPrecio() != null && pag.getPrecio().doubleValue() != 0 ?
+                    "(+$" + formatter.format(pag.getPrecio()) + ")" : "") + ", ";
+        }
+        if (extras.length() > 1) {
+            extras = extras.substring(0, extras.length() - 1);
+        }
+        detOrden.setObservaciones(extras);
+
         orden.getDetOrdenList().add(detOrden);
         orden.setSubtotal(obtenerTotal(orden));
         orden.setComision(new BigDecimal(0));
@@ -669,6 +720,7 @@ public class MainActivity extends AppCompatActivity {
         ServicesAPI servicesAPI = RetrofitClient.getClient().create(ServicesAPI.class);
         Pedido pedido = new Pedido();
 
+        Cargador.show(this);
         System.out.println("Cliente: " + getCliente());
         o.setCliente(getCliente());
         pedido.setOrden(o);
@@ -683,18 +735,26 @@ public class MainActivity extends AppCompatActivity {
                     //Toast.makeText(getContext(), "todo ok", Toast.LENGTH_LONG).show();
                     Orden ofertas = response.body();
                     System.out.println("Tamaño: " + ofertas);
-
-                    //getBarra().setVisibility(View.GONE);
-                    //getOpciones().setVisibility(View.GONE);
-                    Fragment fragment = new MensajeConfirmaOrdenFragment();
-                    FragmentManager fragmentManager = getSupportFragmentManager();
-                    fragmentManager.popBackStack();
-                    fragmentManager.beginTransaction().replace(R.id.container, fragment, "MensajeConfirmaOrdenFragment")
-                            .commit();
-                    orden = null;
+                    if (ofertas.getOrdenPK() != null) {
+                        //getBarra().setVisibility(View.GONE);
+                        //getOpciones().setVisibility(View.GONE);
+                        Fragment fragment = new MensajeConfirmaOrdenFragment();
+                        FragmentManager fragmentManager = getSupportFragmentManager();
+                        fragmentManager.popBackStack();
+                        fragmentManager.beginTransaction().replace(R.id.container, fragment, "MensajeConfirmaOrdenFragment")
+                                .commit();
+                        orden = null;
+                    } else {
+                        Toast.makeText(context, "Hubo un problema con tu método de pago", Toast.LENGTH_LONG).show();
+                    }
                 } else {
                     System.out.println("Error: " + response.errorBody());
                     Toast.makeText(context, "Hubo un error al sincronizar la orden", Toast.LENGTH_LONG).show();
+                }
+                try {
+                    Cargador.hide();
+                } catch (Exception e) {
+
                 }
             }
 
@@ -704,6 +764,11 @@ public class MainActivity extends AppCompatActivity {
                 System.out.println(t.getMessage());
                 //Toast.makeText(this, t.getMessage(), Toast.LENGTH_LONG).show();
                 Toast.makeText(context, "Hubo un error al sincronizar la orden", Toast.LENGTH_LONG).show();
+                try {
+                    Cargador.hide();
+                } catch (Exception e) {
+
+                }
             }
         });
         return null;
@@ -740,7 +805,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void ayuda() {
-        Toast.makeText(context, "En desarrollo", Toast.LENGTH_LONG).show();
+        irAyuda();
     }
 
     public void acercaDeWeris() {
@@ -757,6 +822,9 @@ public class MainActivity extends AppCompatActivity {
         //getOpciones().setVisibility(View.GONE);
         orden.setMetodoPago(formaPago.getId());
         orden.setMetodoPagoSeleccionado(formaPago);
+        FormaPago f = new FormaPago();
+        f.setFormaPagoPK(new FormaPagoPK(2, 1));
+        orden.setFormaPago(f);;
         Fragment fragment = new ProcesarOrdenFragment(orden);
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.container, fragment, "ProcesarOrdenFragment")
@@ -774,7 +842,7 @@ public class MainActivity extends AppCompatActivity {
                 .commit();
     }
 
-    public void actualizarMetodoPago(View view) {
+    /*public void actualizarMetodoPago(View view) {
         boolean checked = ((RadioButton) view).isChecked();
         // Check which RadioButton was clicked
         TextView txtMetodoPago = findViewById(R.id.txtMetodoPago);
@@ -790,12 +858,14 @@ public class MainActivity extends AppCompatActivity {
                     this.orden.setFormaPago(f);
                     this.orden.setMetodoPagoSeleccionado(null);
                     this.orden.setMetodoPago(null);
+                    System.out.println("Entro en efectivo select");
                 } else {
                     txtMetodoPago.setVisibility(View.VISIBLE);
                     metodoPagoLy.setVisibility(View.VISIBLE);
                     FormaPago f = new FormaPago();
                     f.setFormaPagoPK(new FormaPagoPK(2, 1));
                     this.orden.setFormaPago(f);
+                    System.out.println("Entro en efectivo no select");
                 }
                 break;
             // Perform your logic
@@ -818,6 +888,19 @@ public class MainActivity extends AppCompatActivity {
                 }
                 break;
         }
+    }*/
+
+    public void irAyuda() {
+        String url = "https://api.whatsapp.com/send?phone=50378400091";
+        Intent i = new Intent(Intent.ACTION_VIEW);
+        i.setData(Uri.parse(url));
+        startActivity(i);
+    }
+
+
+    public void nuevaDireccion(View view) {
+        Util.activity(this, new MapsActivity(), false);
+        //finish();
     }
 
 

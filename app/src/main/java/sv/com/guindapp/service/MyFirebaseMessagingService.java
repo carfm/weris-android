@@ -1,5 +1,7 @@
 package sv.com.guindapp.service;
 
+import static android.app.PendingIntent.FLAG_IMMUTABLE;
+
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -21,6 +23,7 @@ import com.google.firebase.messaging.RemoteMessage;
 
 import sv.com.guindapp.MainActivity;
 import sv.com.guindapp.R;
+import sv.com.guindapp.SplashActivity;
 import sv.com.guindapp.util.Util;
 
 /**
@@ -67,7 +70,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         Log.d(TAG, "From: " + remoteMessage.getFrom());
 
         // Check if message contains a data payload.
-        if (remoteMessage.getData().size() > 0) {
+       // if (remoteMessage.getData().size() > 0) {
             Log.d(TAG, "Message data payload: " + remoteMessage.getData());
 
             if (/* Check if data needs to be processed by long running job */ true) {
@@ -78,11 +81,12 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 handleNow();
             }
 
-        }
+      //  }
 
         // Check if message contains a notification payload.
         if (remoteMessage.getNotification() != null) {
             Log.d(TAG, "Message Notification Body: " + remoteMessage.getNotification().getBody());
+            sendNotification(remoteMessage);
         }
 
         // Also if you intend on generating your own notifications as a result of a received FCM
@@ -144,21 +148,21 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     /**
      * Create and show a simple notification containing the received FCM message.
      *
-     * @param messageBody FCM message body received.
+     * @param remoteMessage FCM message body received.
      */
-    private void sendNotification(String messageBody) {
+    private void sendNotification(RemoteMessage remoteMessage) {
         Intent intent = new Intent(this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
-                PendingIntent.FLAG_ONE_SHOT);
+                PendingIntent.FLAG_IMMUTABLE);
 
         String channelId = getString(R.string.default_notification_channel_id);
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder =
                 new NotificationCompat.Builder(this, channelId)
-                        .setSmallIcon(R.drawable.weris_logo)
-                        .setContentTitle(getString(R.string.fcm_message))
-                        .setContentText(messageBody)
+                        .setSmallIcon(R.drawable.ic_usuarios)
+                        .setContentTitle(remoteMessage.getNotification().getTitle())
+                        .setContentText(remoteMessage.getNotification().getBody())
                         .setAutoCancel(true)
                         .setSound(defaultSoundUri)
                         .setContentIntent(pendingIntent);

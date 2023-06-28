@@ -65,7 +65,7 @@ public class ProductoResumenAdapter extends CardSliderAdapter<ProductoResumenAda
 
         public ProductoViewHolder(View view) {
             super(view);
-            imageView = view.findViewById(R.id.img_prod);
+            imageView = view.findViewById(R.id.disfruta);
             producto = view.findViewById(R.id.producto);
             descripcion = view.findViewById(R.id.descripcion);
             precio = view.findViewById(R.id.precio);

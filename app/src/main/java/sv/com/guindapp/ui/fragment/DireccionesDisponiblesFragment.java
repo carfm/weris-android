@@ -66,7 +66,7 @@ public class DireccionesDisponiblesFragment extends Fragment {
 
     public void obtenerDireccionesCliente() {
         ServicesAPI servicesAPI = RetrofitClient.getClient().create(ServicesAPI.class);
-        Call<List<DireccionCliente>> call = servicesAPI.direccionesPorCliente(MainActivity.cliente.getClientePK().getIdCompania(),MainActivity.cliente.getClientePK().getId());
+        Call<List<DireccionCliente>> call = servicesAPI.direccionesPorCliente(MainActivity.cliente.getClientePK().getIdCompania(), MainActivity.cliente.getClientePK().getId());
         call.enqueue(new Callback<List<DireccionCliente>>() {
             @Override
             public void onResponse(Call<List<DireccionCliente>> call, Response<List<DireccionCliente>> response) {
@@ -96,7 +96,7 @@ public class DireccionesDisponiblesFragment extends Fragment {
             public void onItemClick(IParametro item) {
                 ((MainActivity) getContext()).llenarDireccionCliente((DireccionCliente) item);
             }
-        },false);
+        }, false, null);
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getContext(), 1);
         rvResultados.setLayoutManager(mLayoutManager);
         rvResultados.setAdapter(adapter);

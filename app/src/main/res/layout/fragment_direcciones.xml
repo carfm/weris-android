@@ -5,35 +5,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorFondo"
-    android:paddingRight="25dp"
     android:paddingLeft="25dp"
-    tools:context=".ui.fragment.DireccionesFragment"
-    >
-
-
-    <View
-        android:visibility="gone"
-        android:id="@+id/line"
-        android:layout_width="match_parent"
-        android:layout_height="3dp"
-        android:layout_gravity="center"
-        android:background="@color/colorFondo2"
-        app:layout_constraintBottom_toTopOf="@+id/rv_direcciones"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    android:paddingRight="25dp"
+    tools:context=".ui.fragment.DireccionesFragment">
 
     <LinearLayout
         android:id="@+id/sin_direcciones"
-        android:orientation="vertical"
-        android:gravity="center"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="visible">
+
         <ImageView
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:src="@drawable/sin_direccion"
             android:visibility="visible" />
+
         <TextView
             android:id="@+id/text1"
             android:layout_width="match_parent"
@@ -43,20 +32,21 @@
             android:text="Sin direcciones guardadas"
             android:textColor="@color/colorTextBlue"
             android:textSize="20dp" />
+
         <TextView
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
             android:id="@+id/sub_categoria"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:fontFamily="@font/basier_regular"
             android:gravity="center"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
             android:text="Agrega una nueva dirección para poder entregar tu pedido"
             android:textColor="@color/colorTextGris"
             android:textSize="15dp" />
 
         <Button
-            android:id="@+id/fijar"
+            android:id="@+id/fijar2"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_gravity="center"
@@ -65,51 +55,67 @@
             android:layout_marginRight="10dp"
             android:background="@drawable/roundedbutton_add"
             android:fontFamily="@font/basier_semi_bold"
+            android:onClick="nuevaDireccion"
             android:text="+  Nueva dirección"
             android:textAllCaps="false"
             android:textColor="@color/colorPrimary"
             android:textSize="15dp" />
     </LinearLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scroll_view"
         android:visibility="gone"
-        android:id="@+id/rv_direcciones"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:itemCount="2"
-        tools:layout_editor_absoluteX="25dp"
-        tools:listitem="@layout/item_direccion" />
+        android:layout_height="match_parent">
 
-    <Button
-        android:visibility="gone"
-        android:id="@+id/agregar_direccion"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/roundedbutton_add"
-        android:fontFamily="@font/basier_semi_bold"
-        android:text="+  Nueva dirección"
-        android:textAllCaps="false"
-        android:textColor="@color/colorPrimary"
-        android:textSize="15dp"
-        app:layout_constraintTop_toBottomOf="@+id/rv_direcciones"
-        tools:layout_editor_absoluteX="25dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_direcciones"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:overScrollMode="never"
+                android:visibility="gone"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:itemCount="6"
+                tools:layout_editor_absoluteX="25dp"
+                tools:listitem="@layout/item_direccion" />
 
+            <Button
+                android:id="@+id/agregar_direccion"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="60dp"
+                android:background="@drawable/roundedbutton_add"
+                android:fontFamily="@font/basier_semi_bold"
+                android:text="+  Nueva dirección"
+                android:textAllCaps="false"
+                android:textColor="@color/colorPrimary"
+                android:textSize="15dp"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/rv_direcciones"
+                tools:layout_editor_absoluteX="25dp" />
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
 
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
-        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginBottom="16dp"
         android:src="@drawable/ic_add_white_48dp"
+        android:visibility="gone"
         app:backgroundTint="@color/colorPrimary"
         app:borderWidth="0dp"
         app:elevation="6dp"

@@ -32,6 +32,7 @@ import sv.com.guindapp.model.interfaces.OnItemClickListener;
 import sv.com.guindapp.api.RetrofitClient;
 import sv.com.guindapp.service.ServicesAPI;
 import sv.com.guindapp.ui.adapter.ResultadoAdapter;
+import sv.com.guindapp.util.Cargador;
 
 public class MainFragment extends Fragment {
 
@@ -108,6 +109,7 @@ public class MainFragment extends Fragment {
 
 
     public void obtenerComercios() {
+        Cargador.show((MainActivity) getContext());
         ServicesAPI servicesAPI = RetrofitClient.getClient().create(ServicesAPI.class);
         Call<List<Comercio>> call = servicesAPI.comerciosSearch(categoria != null ? categoria.getId()
                 : null, palabra);
@@ -132,11 +134,13 @@ public class MainFragment extends Fragment {
                 } else {
                     System.out.println("Error: " + response.errorBody());
                 }
+                Cargador.hide();
             }
 
             @Override
             public void onFailure(Call<List<Comercio>> call, Throwable t) {
 //                esta.setText(t.getMessage());
+                Cargador.hide();
                 Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });

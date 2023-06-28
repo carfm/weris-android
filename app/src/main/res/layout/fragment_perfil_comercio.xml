@@ -37,7 +37,7 @@
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_below="@+id/img_producto"
-
+                    android:visibility="gone"
                     android:layout_alignParentEnd="true"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="-70dp"
@@ -48,6 +48,7 @@
                     app:civ_border_width="3dp" />
 
                 <TextView
+                    android:visibility="gone"
                     android:id="@+id/tiempo_espera"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
@@ -162,7 +163,7 @@
                         android:fontFamily="@font/basier_semi_bold"
                         android:gravity="center"
                         android:paddingTop="5dp"
-                        android:text="Horarios"
+                        android:text="Preparación"
                         android:textColor="@color/colorTextBlue"
                         android:textSize="15dp" />
 

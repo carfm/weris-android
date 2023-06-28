@@ -22,6 +22,7 @@ public class DireccionCliente implements Serializable, IParametro {
     private String puntoReferencia;
     private String direccion;
     private String telefono;
+    private String numeroCasa;
     private Date fechaIngreso;
     private String ciudad;
     private String tipo;
@@ -155,4 +156,11 @@ public class DireccionCliente implements Serializable, IParametro {
         this.longitud = longitud;
     }
 
+    public String getNumeroCasa() {
+        return numeroCasa;
+    }
+
+    public void setNumeroCasa(String numeroCasa) {
+        this.numeroCasa = numeroCasa;
+    }
 }

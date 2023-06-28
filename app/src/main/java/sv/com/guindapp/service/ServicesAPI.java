@@ -113,6 +113,9 @@ public interface ServicesAPI {
     @DELETE("com.guindapp.entidades.cliente/borrar-metodo-pago-cliente/{id}")
     Call <MetodoPago>borrarMetodoPagoCliente(@Path("id") Integer id);
 
+    @DELETE("com.guindapp.entidades.direccioncliente/{compania}/{idCliente}/{id}")
+    Call <String>borrarDireccionCliente(@Path("id") Integer id, @Path("compania") Integer idCompania, @Path("idCliente") Integer idCliente);
+
     @GET("com.guindapp.entidades.comercio/comercios-por-busqueda")
     Call<List<Comercio>> comerciosSearch(@Query("id-categoria") Integer idCategoria,@Query("palabra") String palabra);
 }

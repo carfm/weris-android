@@ -8,8 +8,8 @@ android {
         applicationId "sv.com.guindapp"
         minSdkVersion 23
         targetSdkVersion 31
-        versionCode 10
-        versionName "1.10"
+        versionCode 24
+        versionName "1.24"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -33,17 +33,17 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.0.2'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
-    implementation 'com.google.firebase:firebase-auth:19.1.0'
+    implementation 'com.google.firebase:firebase-auth:22.0.0'
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation "androidx.recyclerview:recyclerview:1.1.0"
     implementation 'com.jakewharton.rxbinding:rxbinding:0.4.0'
-    implementation 'com.google.android.gms:play-services-auth:18.0.0'
+    implementation 'com.google.android.gms:play-services-auth:20.5.0'
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     implementation 'com.facebook.android:facebook-android-sdk:[5,6)'
     implementation 'com.github.IslamKhSh:CardSlider:1.0.1'
-    implementation 'com.google.firebase:firebase-core:17.2.0'
-    implementation 'com.google.firebase:firebase-iid:20.0.0'
-    implementation 'com.google.firebase:firebase-messaging:20.0.0'
+    implementation 'com.google.firebase:firebase-core:21.1.1'
+    implementation 'com.google.firebase:firebase-iid:21.1.0'
+    implementation 'com.google.firebase:firebase-messaging:23.1.2'
     implementation 'android.arch.work:work-runtime:1.0.1'
 
 
@@ -58,6 +58,7 @@ dependencies {
     implementation 'com.google.android:flexbox:1.1.0'
 
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
+    implementation 'com.google.android.gms:play-services-location:21.0.1'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
 
     //RXJAVA
